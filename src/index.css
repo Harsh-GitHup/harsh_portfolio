@@ -33,3 +33,10 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #39ff14;
 }
+
+.disabled-link {
+  pointer-events: none; /* Prevents mouse clicks */
+  cursor: default;     /* Changes cursor to indicate no interaction */
+  color: gray;         /* Styles the link to look disabled */
+  text-decoration: none; /* Optional: removes the underline */
+}

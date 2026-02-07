@@ -17,13 +17,13 @@ export const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/30 border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           className="text-2xl font-bold tracking-tighter"
         >
-          <span className="text-white">DEV</span>
-          <span className="text-[#39ff14]">.IO</span>
+          <span className="text-white">HARSH</span>
+          <span className="text-[#39ff14]">.DEV</span>
         </motion.div>
 
         {/* Desktop Nav */}
@@ -44,7 +44,7 @@ export const Header = () => {
         </nav>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="md:hidden text-white p-2 hover:bg-white/10 rounded-full transition-colors"
           onClick={() => setIsOpen(!isOpen)}
         >

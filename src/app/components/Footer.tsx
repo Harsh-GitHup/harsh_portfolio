@@ -6,10 +6,10 @@ export const Footer = () => {
     <footer className="py-12 bg-black border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
-           {/* Logo / Brand */}
-           <div className="text-2xl font-bold tracking-tighter">
-            <span className="text-white">DEV</span>
-            <span className="text-[#39ff14]">.IO</span>
+          {/* Logo / Brand */}
+          <div className="text-2xl font-bold tracking-tighter">
+            <span className="text-white">HARSH</span>
+            <span className="text-[#39ff14]">.DEV</span>
           </div>
 
           <div className="flex gap-6">
@@ -21,10 +21,10 @@ export const Footer = () => {
         </div>
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-          <p>© 2026 Dev Portfolio. All rights reserved.</p>
+          <p>© 2026 Harsh Portfolio. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="#privacy-policy" className="hover:text-white transition-colors disabled-link">Privacy Policy</a>
+            <a href="#terms-of-service" className="hover:text-white transition-colors disabled-link">Terms of Service</a>
           </div>
         </div>
       </div>

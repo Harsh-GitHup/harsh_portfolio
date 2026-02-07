@@ -6,30 +6,17 @@ export const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout | null = null;
-
     const toggleVisibility = () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
       }
-
-      timeoutId = setTimeout(() => {
-        if (window.scrollY > 300) {
-          setIsVisible(true);
-        } else {
-          setIsVisible(false);
-        }
-      }, 100);
     };
 
     window.addEventListener('scroll', toggleVisibility);
 
-    return () => {
-      window.removeEventListener('scroll', toggleVisibility);
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
+    return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
   const scrollToTop = () => {

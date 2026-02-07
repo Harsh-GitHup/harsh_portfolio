@@ -7,10 +7,10 @@ export const About = () => {
     <section id="about" className="py-24 bg-[#050505] relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#39ff14]/5 rounded-full blur-[120px] -z-10" />
-      
+
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center gap-16">
-          
+
           {/* Text Content */}
           <div className="flex-1">
             <motion.div
@@ -21,7 +21,7 @@ export const About = () => {
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
                 About <span className="text-[#39ff14]">Me</span>
               </h2>
-              
+
               <div className="prose prose-invert max-w-none text-gray-300 text-lg leading-relaxed space-y-6">
                 <p>
                   Hello! I'm <span className="text-white font-semibold">Harsh Kesharwani</span>, a passionate software developer with a strong foundation in full-stack web development.
@@ -30,18 +30,18 @@ export const About = () => {
                   I am a <span className="text-[#39ff14]">B.Tech graduate</span> in Computer Science & Engineering from the <span className="text-white">Corporate Institute of Science & Technology</span>, Batch of 2024. My academic journey provided me with deep insights into algorithms, data structures, and software engineering principles.
                 </p>
                 <p>
-                  To further hone my practical skills, I completed comprehensive <span className="text-[#39ff14]">Full Stack Python training</span> at <span className="text-white">Naresh IT</span>, where I mastered modern web technologies including Django, React, and database management. I love building scalable applications that solve real-world problems.
+                  To further hone my practical skills, I completed comprehensive <span className="text-[#39ff14]">Full Stack Python training</span> at <span className="text-white">Naresh IT</span>, where I mastered modern web technologies including Django, Angular, and database management. I love building scalable applications that solve real-world problems.
                 </p>
               </div>
 
               <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <Card 
+                <Card
                   icon={GraduationCap}
                   title="Education"
                   subtitle="B.Tech in CSE (2024)"
                   detail="Corporate Institute of Science & Technology"
                 />
-                <Card 
+                <Card
                   icon={Award}
                   title="Certification"
                   subtitle="Full Stack Python"
@@ -52,7 +52,7 @@ export const About = () => {
           </div>
 
           {/* Visual/Image Side */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -61,14 +61,13 @@ export const About = () => {
             <div className="relative w-64 h-64 md:w-80 md:h-80">
               <div className="absolute inset-0 bg-[#39ff14]/20 rounded-full blur-xl animate-pulse" />
               <div className="relative w-full h-full rounded-full border-2 border-[#39ff14]/50 bg-black/50 backdrop-blur-sm flex items-center justify-center overflow-hidden">
-                <User size={120} className="text-gray-400" />
-                {/* Note: If you have a real photo, replace the Icon above with an img tag:
-                    <img src="/path/to/photo.jpg" alt="Harsh Kesharwani" className="w-full h-full object-cover" /> 
-                */}
+                {/* Note: If you have a real photo, replace the Icon above with an img tag: */}
+                {/* <User size={120} className="text-gray-400" /> */}
+                <img src="/harsh.png" alt="Harsh Kesharwani" className="w-full h-full object-contain rounded-full" />
               </div>
-              
+
               {/* Orbiting elements for decoration */}
-              <motion.div 
+              <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-[-20px] border border-[#39ff14]/20 rounded-full border-dashed"

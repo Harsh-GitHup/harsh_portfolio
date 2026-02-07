@@ -1,18 +1,15 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { 
-  Code2, 
-  Database, 
-  Layout, 
-  Server, 
-  Terminal, 
-  Braces, 
-  FileJson, 
-  Layers, 
-  Box, 
+import {
+  Code2,
+  Database,
+  Layout,
+  Server,
+  Terminal,
+  Braces,
+  Layers,
+  Box,
   GitBranch,
-  Github,
-  BookOpen,
   Container,
   FileCode,
   Globe,
@@ -21,7 +18,7 @@ import {
   BarChart,
   Cloud,
   Package,
-  Cpu,
+  Sheet,
   Lock,
   Workflow,
   FlaskConical,
@@ -58,17 +55,18 @@ const categories = [
       { name: 'SQLAlchemy / ORM', icon: FileCode, color: 'text-indigo-400' },
       { name: 'Redis', icon: Zap, color: 'text-red-500' },
       { name: 'Pandas & NumPy', icon: BarChart, color: 'text-blue-500' },
+      { name: 'Excel', icon: Sheet, color: 'text-purple-400' },
     ]
   },
   {
     title: "DevOps & Cloud",
     skills: [
-      { name: 'Docker', icon: Container, color: 'text-blue-500' },
-      { name: 'GitHub Actions', icon: Workflow, color: 'text-white' },
-      { name: 'AWS (EC2/S3)', icon: Cloud, color: 'text-orange-500' },
-      { name: 'Vercel / Render', icon: Cloud, color: 'text-white' },
       { name: 'Git & Workflows', icon: GitBranch, color: 'text-orange-600' },
-      {name: 'Postman', icon: FlaskConical, color: 'text-white' },
+      { name: 'GitHub Actions', icon: Workflow, color: 'text-white' },
+      { name: 'Vercel / Render', icon: Cloud, color: 'text-white' },
+      { name: 'Postman', icon: FlaskConical, color: 'text-white' },
+      { name: 'Docker', icon: Container, color: 'text-blue-500' },
+      { name: 'AWS (EC2/S3)', icon: Cloud, color: 'text-orange-500' },
     ]
   }
 ];
@@ -92,7 +90,7 @@ export const TechStack = () => {
         <div className="space-y-16">
           {categories.map((category, catIndex) => (
             <div key={category.title}>
-              <motion.h3 
+              <motion.h3
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -101,7 +99,7 @@ export const TechStack = () => {
               >
                 {category.title}
               </motion.h3>
-              
+
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
                 {category.skills.map((tech, index) => (
                   <motion.div
