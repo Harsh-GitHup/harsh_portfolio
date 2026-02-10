@@ -12,19 +12,12 @@ export const Footer = () => {
             <span className="text-[#39ff14]">.DEV</span>
           </div>
 
-          <div className="flex gap-6">
+          {/* Social Links */}
+          <div className="flex gap-4">
             <SocialLink href="https://github.com/Harsh-GitHup" icon={<Github size={20} />} />
             <SocialLink href="https://www.linkedin.com/in/harshkesharwani" icon={<Linkedin size={20} />} />
             <SocialLink href="https://x.com/HarshKesha91325" icon={<Twitter size={20} />} />
             <SocialLink href="mailto:harshkesharwani037@gmail.com" icon={<Mail size={20} />} />
-          </div>
-        </div>
-
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-          <p>© 2026 Harsh Portfolio. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#privacy-policy" className="hover:text-white transition-colors disabled-link">Privacy Policy</a>
-            <a href="#terms-of-service" className="hover:text-white transition-colors disabled-link">Terms of Service</a>
           </div>
         </div>
       </div>
