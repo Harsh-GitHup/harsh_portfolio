@@ -7,6 +7,7 @@ This document outlines the design and development guidelines for the Figma Portf
 ## General Guidelines
 
 ### Code Quality
+
 * Write clean, maintainable, and well-documented code
 * Refactor code as you go to keep it organized and readable
 * Use meaningful variable and function names that clearly describe their purpose
@@ -14,6 +15,7 @@ This document outlines the design and development guidelines for the Figma Portf
 * Follow consistent naming conventions throughout the project
 
 ### Layout and Positioning
+
 * Only use absolute positioning when necessary
 * Opt for responsive and well-structured layouts using flexbox and grid by default
 * Ensure all layouts are mobile-first and responsive across all device sizes
@@ -21,12 +23,14 @@ This document outlines the design and development guidelines for the Figma Portf
 * Maintain consistent spacing using a defined spacing scale (8px base unit)
 
 ### Performance
+
 * Optimize images and assets for web (use WebP format where possible)
 * Lazy load images and components below the fold
 * Minimize bundle sizes by code-splitting and tree-shaking unused code
 * Use CSS variables for theming to avoid repetitive styles
 
 ### Accessibility
+
 * Ensure all interactive elements are keyboard accessible
 * Provide appropriate ARIA labels and roles where needed
 * Maintain sufficient color contrast ratios (WCAG AA minimum)
@@ -38,6 +42,7 @@ This document outlines the design and development guidelines for the Figma Portf
 ## Design System Guidelines
 
 ### Typography
+
 * Base font size: 16px
 * Font family: Use a modern sans-serif (e.g., Inter, Poppins, or system fonts)
 * Heading scale:
@@ -51,6 +56,7 @@ This document outlines the design and development guidelines for the Figma Portf
 * Font weights: 400 (regular), 500 (medium), 600 (semibold), 700 (bold)
 
 ### Color Palette
+
 * Primary: #6366F1 (Indigo) - Main brand color for CTAs and emphasis
 * Secondary: #8B5CF6 (Purple) - Accent color for highlights
 * Background: #FFFFFF (White) - Main background
@@ -63,13 +69,16 @@ This document outlines the design and development guidelines for the Figma Portf
 * Error: #EF4444 (Red)
 
 ### Dark Mode (Optional)
+
 * Background: #0F172A (Dark blue-gray)
 * Surface: #1E293B (Slightly lighter)
 * Text Primary: #F1F5F9 (Off-white)
 * Text Secondary: #94A3B8 (Light gray)
 
 ### Spacing Scale
+
 Use consistent spacing throughout the design:
+
 * xs: 4px
 * sm: 8px
 * md: 16px
@@ -80,6 +89,7 @@ Use consistent spacing throughout the design:
 * 4xl: 96px
 
 ### Breakpoints
+
 * Mobile: 320px - 640px
 * Tablet: 641px - 1024px
 * Desktop: 1025px - 1440px
@@ -90,14 +100,17 @@ Use consistent spacing throughout the design:
 ## Component Guidelines
 
 ### Button Component
+
 The Button component is a fundamental interactive element designed to trigger actions or navigate users through the application.
 
 #### Usage
+
 * Use buttons for important actions: form submissions, confirmations, navigation
 * Button labels should be clear, concise, and action-oriented (e.g., "View Project", "Contact Me", "Download CV")
 * Always provide visual feedback on hover and active states
 
 #### Variants
+
 * **Primary Button**
   * Purpose: Main call-to-action
   * Visual Style: Filled with primary color (#6366F1), white text
@@ -123,14 +136,17 @@ The Button component is a fundamental interactive element designed to trigger ac
   * Hover: Underline
 
 ### Card Component
+
 Cards are used to display portfolio projects and content sections.
 
 #### Usage
+
 * Use cards to group related information
 * Each card should have a clear visual hierarchy
 * Include a hover effect to indicate interactivity
 
 #### Structure
+
 * Image/thumbnail at the top (16:9 aspect ratio preferred)
 * Title (H4)
 * Brief description (1-2 sentences)
@@ -142,9 +158,11 @@ Cards are used to display portfolio projects and content sections.
 * Background: Surface color
 
 ### Navigation Component
+
 The navigation should be clean, accessible, and consistent across all pages.
 
 #### Desktop Navigation
+
 * Fixed/sticky header at the top
 * Logo on the left
 * Menu items center or right-aligned
@@ -152,15 +170,18 @@ The navigation should be clean, accessible, and consistent across all pages.
 * Include a prominent CTA button (e.g., "Contact" or "Hire Me")
 
 #### Mobile Navigation
+
 * Hamburger menu icon (top-right)
 * Slide-in or overlay menu
 * Large touch targets (minimum 44x44px)
 * Close button clearly visible
 
 ### Form Components
+
 Forms should be simple and user-friendly.
 
 #### Input Fields
+
 * Label above each input
 * Clear placeholder text
 * Border radius: 8px
@@ -170,11 +191,13 @@ Forms should be simple and user-friendly.
 * Error state: Red border with error message below
 
 #### Validation
+
 * Real-time validation for immediate feedback
 * Clear error messages that explain how to fix the issue
 * Success indicators when input is valid
 
 ### Footer Component
+
 * Background: Dark color (primary or dark gray)
 * Contains: Social links, copyright, contact info
 * Layout: Grid layout for desktop, stacked for mobile
@@ -185,6 +208,7 @@ Forms should be simple and user-friendly.
 ## Portfolio-Specific Guidelines
 
 ### Hero Section
+
 * Full-width, eye-catching design
 * Include a professional photo or illustration
 * Clear headline introducing yourself
@@ -193,6 +217,7 @@ Forms should be simple and user-friendly.
 * Height: 80-100vh on desktop, adapt for mobile
 
 ### Projects Section
+
 * Display projects in a grid (3 columns desktop, 2 tablet, 1 mobile)
 * Each project card should include:
   * Project thumbnail/preview image
@@ -204,6 +229,7 @@ Forms should be simple and user-friendly.
 * Consistent card heights or masonry layout
 
 ### About Section
+
 * Personal photo or avatar
 * Bio (2-3 paragraphs)
 * Skills list with visual indicators (icons or progress bars)
@@ -211,12 +237,14 @@ Forms should be simple and user-friendly.
 * Background: Alternate color from main background
 
 ### Contact Section
+
 * Contact form with fields: Name, Email, Message
 * Alternative contact methods: Email link, LinkedIn, GitHub
 * Social media icons
 * Consider adding a success message after form submission
 
 ### Animations and Interactions
+
 * Subtle fade-in animations on scroll for sections
 * Smooth scrolling between sections
 * Hover effects on interactive elements
@@ -225,6 +253,7 @@ Forms should be simple and user-friendly.
 * Avoid excessive animations that may cause motion sickness
 
 ### Images and Media
+
 * All images should be optimized and compressed
 * Use lazy loading for images below the fold
 * Project screenshots should be high quality but optimized
@@ -236,16 +265,19 @@ Forms should be simple and user-friendly.
 ## Figma-to-Code Best Practices
 
 ### Component Naming
+
 * Use clear, descriptive component names in Figma that match code conventions
 * Group related elements in frames
 * Use auto-layout in Figma to ensure responsive behavior translates to code
 
 ### Design Tokens
+
 * Define colors, typography, and spacing as variables in Figma
 * Export and use these as CSS variables or design tokens in code
 * Keep design tokens synchronized between Figma and code
 
 ### Responsive Design
+
 * Design mobile, tablet, and desktop versions in Figma
 * Use constraints and auto-layout to define responsive behavior
 * Test responsive behavior in code matches Figma designs
@@ -266,6 +298,7 @@ Forms should be simple and user-friendly.
 ## Additional Guidelines
 
 ### SEO Optimization
+
 * Include proper meta tags (title, description, OG tags)
 * Use semantic HTML with proper heading hierarchy
 * Add structured data (JSON-LD) for better search visibility
@@ -273,16 +306,16 @@ Forms should be simple and user-friendly.
 * Create descriptive URLs
 
 ### Browser Support
+
 * Support latest 2 versions of major browsers (Chrome, Firefox, Safari, Edge)
 * Graceful degradation for older browsers
 * Test on both desktop and mobile browsers
 
 ### Documentation
+
 * Comment complex logic in code
 * Maintain a README with setup instructions
 * Document component props and usage
 * Keep this guidelines document updated as the project evolves
 
 ---
-
-**Last Updated**: 2026-02-07 15:53:55

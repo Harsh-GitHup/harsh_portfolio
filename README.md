@@ -13,6 +13,7 @@ A stunning, modern portfolio website featuring a dark theme with neon green acce
 ## ✨ Features
 
 ### 🎨 Design & UI
+
 - **Futuristic Dark Theme** with vibrant neon green (#39ff14) accents
 - **Smooth Animations** powered by Framer Motion
 - **Responsive Design** - Perfect on all devices (mobile, tablet, desktop)
@@ -21,6 +22,7 @@ A stunning, modern portfolio website featuring a dark theme with neon green acce
 - **Custom Grid Overlays** for a cyberpunk aesthetic
 
 ### 📱 Sections
+
 1. **Hero Section** - Eye-catching landing with animated gradients and call-to-action buttons
 2. **About Me** - Personal introduction with education and certification cards
 3. **Tech Stack** - Comprehensive showcase of technical skills organized by category:
@@ -34,6 +36,7 @@ A stunning, modern portfolio website featuring a dark theme with neon green acce
 7. **Footer** - Professional footer with links
 
 ### 🚀 Technical Features
+
 - **React 18.3.1** with TypeScript for type safety
 - **Vite 6.3.5** for lightning-fast build and development
 - **Framer Motion** for fluid animations
@@ -46,6 +49,7 @@ A stunning, modern portfolio website featuring a dark theme with neon green acce
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **React 18.3.1** - UI library
 - **TypeScript** - Type safety
 - **Tailwind CSS 4** - Utility-first CSS framework
@@ -53,12 +57,14 @@ A stunning, modern portfolio website featuring a dark theme with neon green acce
 - **Vite 6.3.5** - Build tool
 
 ### UI Components
+
 - **Radix UI** - Accessible component primitives
 - **Lucide React** - Icon library
 - **Material UI** - Component library
 - **Emotion** - CSS-in-JS
 
 ### Development Tools
+
 - **ESLint** - Code linting
 - **PostCSS** - CSS processing
 - **TypeScript** - Static typing
@@ -66,20 +72,25 @@ A stunning, modern portfolio website featuring a dark theme with neon green acce
 ## 📦 Installation
 
 ### Prerequisites
+
 - **Node.js** (v18 or higher)
 - **npm** or **pnpm**
 
 ### Clone the Repository
+
 ```bash
 git clone https://github.com/Harsh-GitHup/FigmaPortfolioWebsite.git
 cd FigmaPortfolioWebsite
 ```
 
 ### Install Dependencies
+
 ```bash
 npm install
 ```
+
 Or using pnpm:
+
 ```bash
 pnpm install
 ```
@@ -87,28 +98,36 @@ pnpm install
 ## 🚀 Running the Project
 
 ### Development Server
+
 Start the development server with hot reload:
+
 ```bash
 npm run dev
 ```
+
 The site will be available at `http://localhost:5173`
 
 ### Production Build
+
 Build the project for production:
+
 ```bash
 npm run build
 ```
+
 This creates an optimized build in the `dist/` folder.
 
 ### Preview Production Build
+
 Preview the production build locally:
+
 ```bash
 npm run preview
 ```
 
 ## 📂 Project Structure
 
-```
+```text
 FigmaPortfolioWebsite/
 ├── src/
 │   ├── app/
@@ -138,6 +157,7 @@ FigmaPortfolioWebsite/
 ## 🎨 Customization
 
 ### Color Scheme
+
 The primary accent color is neon green (`#39ff14`). To change it:
 
 1. Update the color values in components (search for `#39ff14`)
@@ -147,20 +167,28 @@ The primary accent color is neon green (`#39ff14`). To change it:
 ### Content Updates
 
 #### Update Personal Information
+
 Edit `src/app/components/About.tsx`:
+
 - Name, bio, education, certifications
 
 #### Update Tech Stack
+
 Edit `src/app/components/TechStack.tsx`:
+
 - Modify the `categories` array to add/remove skills
 
 #### Update Projects
+
 Edit `src/app/components/Projects.tsx`:
+
 - Modify the `projects` array with your actual projects
 - Add GitHub links, live demo URLs, and project images
 
 #### Update Contact Information
+
 Edit `src/app/components/Contact.tsx` and `src/app/components/Footer.tsx`:
+
 - Social media links
 - Email address
 - Contact form configuration
@@ -168,6 +196,7 @@ Edit `src/app/components/Contact.tsx` and `src/app/components/Footer.tsx`:
 ## 🌐 Deployment
 
 ### Deploy to Vercel (Recommended)
+
 1. Push your code to GitHub
 2. Visit [vercel.com](https://vercel.com)
 3. Import your repository
@@ -175,11 +204,13 @@ Edit `src/app/components/Contact.tsx` and `src/app/components/Footer.tsx`:
 5. Click "Deploy"
 
 Your site will be live in minutes with:
+
 - ✅ Automatic HTTPS
 - ✅ Auto-deploy on push
 - ✅ Free custom domain support
 
 ### Deploy to Netlify
+
 1. Push code to GitHub
 2. Visit [netlify.com](https://netlify.com)
 3. Import repository
@@ -187,6 +218,7 @@ Your site will be live in minutes with:
 5. Publish directory: `dist`
 
 ### Deploy to GitHub Pages
+
 ```bash
 npm run build
 # Upload the dist/ folder to GitHub Pages
@@ -216,11 +248,12 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 👨‍💻 Author
 
-**Harsh Kesharwani**
+### Harsh Kesharwani
+
 - Portfolio: [Live URL](https://harsh-githup.github.io/My-Portfolio/)
 - GitHub: [@Harsh-GitHup](https://github.com/Harsh-GitHup)
 - LinkedIn: [@Harsh Kesharwani](https://www.linkedin.com/in/harshkesharwani)
-- Email: harshkesharwani037@gmail.com
+- Email: <harshkesharwani037@gmail.com>
 
 ## 🙏 Acknowledgments
 
@@ -247,9 +280,6 @@ Have an idea? Feel free to open a feature request on [GitHub Issues](https://git
 ---
 
 ⭐ **Star this repo** if you find it helpful!
-
-
-
 
 Made with ❤️ and ☕ by Harsh Kesharwani
 
