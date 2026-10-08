@@ -8,7 +8,7 @@ A stunning, modern portfolio website featuring a dark theme with neon green acce
 
 ## 🎯 Live Demo
 
-🚀 **[View Live Site](#)** _(Deploy to Vercel to get your live URL)_
+🚀 **[View Live Site](https://harshportfolio-beta.vercel.app/)** _(Deployed to Vercel - live URL)_
 
 ## ✨ Features
 
@@ -79,8 +79,8 @@ A stunning, modern portfolio website featuring a dark theme with neon green acce
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/Harsh-GitHup/FigmaPortfolioWebsite.git
-cd FigmaPortfolioWebsite
+git clone https://github.com/Harsh-GitHup/harsh_portfolio.git
+cd harsh_portfolio
 ```
 
 ### Install Dependencies
@@ -128,7 +128,7 @@ npm run preview
 ## 📂 Project Structure
 
 ```text
-FigmaPortfolioWebsite/
+harsh_portfolio/
 ├── src/
 │   ├── app/
 │   │   ├── components/
@@ -271,11 +271,11 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🐛 Bug Reports
 
-Found a bug? Please open an issue on [GitHub Issues](https://github.com/Harsh-GitHup/FigmaPortfolioWebsite/issues).
+Found a bug? Please open an issue on [GitHub Issues](https://github.com/Harsh-GitHup/harsh_portfolio/issues).
 
 ## 💡 Feature Requests
 
-Have an idea? Feel free to open a feature request on [GitHub Issues](https://github.com/Harsh-GitHup/FigmaPortfolioWebsite/issues).
+Have an idea? Feel free to open a feature request on [GitHub Issues](https://github.com/Harsh-GitHup/harsh_portfolio/issues).
 
 ---
 

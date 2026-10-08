@@ -1,14 +1,14 @@
-import React from 'react';
-import '../index.css';
-import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { TechStack } from './components/TechStack';
-import { Projects } from './components/Projects';
-import { Contact } from './components/Contact';
-import { Footer } from './components/Footer';
-import { Resume } from './components/Resume';
-import { About } from './components/About';
-import { ScrollToTop } from './components/ScrollToTop';
+import React from "react";
+import "../index.css";
+import { Header } from "./components/Header";
+import { Hero } from "./components/Hero";
+import { TechStack } from "./components/TechStack";
+import { Projects } from "./components/Projects";
+import { Contact } from "./components/Contact";
+import { Footer } from "./components/Footer";
+import { Resume } from "./components/Resume";
+import { About } from "./components/About";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 function App() {
   return (

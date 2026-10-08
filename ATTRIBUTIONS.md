@@ -7,27 +7,31 @@ This portfolio website was built using amazing open-source tools, libraries, and
 ## 🎨 Design & UI Components
 
 ### Figma Design
+
 - **Original Design**: [Futuristic Dark Portfolio Website](https://www.figma.com/design/1mPSqTYseP9tZQBk0otEio/Futuristic-Dark-Portfolio-Website)
 - **Design System**: Figma Community
 - **License**: Used as design inspiration
 
 ### shadcn/ui
+
 - **Website**: [ui.shadcn.com](https://ui.shadcn.com/)
 - **GitHub**: [shadcn-ui/ui](https://github.com/shadcn-ui/ui)
 - **License**: [MIT License](https://github.com/shadcn-ui/ui/blob/main/LICENSE.md)
 - **Usage**: UI component patterns and design system foundation
 
 ### Radix UI
+
 - **Website**: [radix-ui.com](https://www.radix-ui.com/)
 - **GitHub**: [radix-ui/primitives](https://github.com/radix-ui/primitives)
 - **License**: MIT License
-- **Components Used**: 
+- **Components Used**:
   - Accordion, Alert Dialog, Avatar, Checkbox, Dialog
   - Dropdown Menu, Hover Card, Navigation Menu, Popover
   - Progress, Radio Group, Scroll Area, Select, Slider
   - Switch, Tabs, Toggle, Tooltip
 
 ### Material UI (MUI)
+
 - **Website**: [mui.com](https://mui.com/)
 - **GitHub**: [mui/material-ui](https://github.com/mui/material-ui)
 - **License**: MIT License
@@ -38,6 +42,7 @@ This portfolio website was built using amazing open-source tools, libraries, and
 ## 🖼️ Images & Media
 
 ### Unsplash
+
 - **Website**: [unsplash.com](https://unsplash.com)
 - **License**: [Unsplash License](https://unsplash.com/license)
 - **Usage**: Placeholder images for project showcases
@@ -52,18 +57,21 @@ This portfolio website was built using amazing open-source tools, libraries, and
 ## 🛠️ Core Technologies
 
 ### React
+
 - **Website**: [react.dev](https://react.dev/)
 - **GitHub**: [facebook/react](https://github.com/facebook/react)
 - **License**: MIT License
 - **Version**: 18.3.1
 
 ### Vite
+
 - **Website**: [vitejs.dev](https://vitejs.dev/)
 - **GitHub**: [vitejs/vite](https://github.com/vitejs/vite)
 - **License**: MIT License
 - **Version**: 6.3.5
 
 ### TypeScript
+
 - **Website**: [typescriptlang.org](https://www.typescriptlang.org/)
 - **GitHub**: [microsoft/TypeScript](https://github.com/microsoft/TypeScript)
 - **License**: Apache 2.0 License
@@ -73,6 +81,7 @@ This portfolio website was built using amazing open-source tools, libraries, and
 ## 🎭 Animation & Motion
 
 ### Framer Motion
+
 - **Website**: [framer.com/motion](https://www.framer.com/motion/)
 - **GitHub**: [framer/motion](https://github.com/framer/motion)
 - **License**: MIT License
@@ -84,33 +93,39 @@ This portfolio website was built using amazing open-source tools, libraries, and
 ## 🎨 Styling & CSS
 
 ### Tailwind CSS
+
 - **Website**: [tailwindcss.com](https://tailwindcss.com/)
 - **GitHub**: [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss)
 - **License**: MIT License
 - **Version**: 4.1.12
 
 ### PostCSS
+
 - **Website**: [postcss.org](https://postcss.org/)
 - **GitHub**: [postcss/postcss](https://github.com/postcss/postcss)
 - **License**: MIT License
 
 ### Emotion
+
 - **Website**: [emotion.sh](https://emotion.sh/)
 - **GitHub**: [emotion-js/emotion](https://github.com/emotion-js/emotion)
 - **License**: MIT License
 - **Packages**: @emotion/react, @emotion/styled
 
 ### Class Variance Authority (CVA)
+
 - **GitHub**: [joe-bell/cva](https://github.com/joe-bell/cva)
 - **License**: Apache 2.0 License
 - **Version**: 0.7.1
 
 ### clsx
+
 - **GitHub**: [lukeed/clsx](https://github.com/lukeed/clsx)
 - **License**: MIT License
 - **Version**: 2.1.1
 
 ### tailwind-merge
+
 - **GitHub**: [dcastil/tailwind-merge](https://github.com/dcastil/tailwind-merge)
 - **License**: MIT License
 - **Version**: 3.2.0
@@ -120,6 +135,7 @@ This portfolio website was built using amazing open-source tools, libraries, and
 ## 🎯 Icons
 
 ### Lucide React
+
 - **Website**: [lucide.dev](https://lucide.dev/)
 - **GitHub**: [lucide-icons/lucide](https://github.com/lucide-icons/lucide)
 - **License**: ISC License
@@ -131,6 +147,7 @@ This portfolio website was built using amazing open-source tools, libraries, and
 ## 📦 Additional Libraries
 
 ### React Hook Form
+
 - **Website**: [react-hook-form.com](https://react-hook-form.com/)
 - **GitHub**: [react-hook-form/react-hook-form](https://github.com/react-hook-form/react-hook-form)
 - **License**: MIT License
@@ -138,36 +155,42 @@ This portfolio website was built using amazing open-source tools, libraries, and
 - **Usage**: Form validation and state management
 
 ### Date-fns
+
 - **Website**: [date-fns.org](https://date-fns.org/)
 - **GitHub**: [date-fns/date-fns](https://github.com/date-fns/date-fns)
 - **License**: MIT License
 - **Version**: 3.6.0
 
 ### Recharts
+
 - **Website**: [recharts.org](https://recharts.org/)
 - **GitHub**: [recharts/recharts](https://github.com/recharts/recharts)
 - **License**: MIT License
 - **Version**: 2.15.2
 
 ### Sonner
+
 - **GitHub**: [emilkowalski/sonner](https://github.com/emilkowalski/sonner)
 - **License**: MIT License
 - **Version**: 2.0.3
 - **Usage**: Toast notifications
 
 ### Embla Carousel
+
 - **Website**: [embla-carousel.com](https://www.embla-carousel.com/)
 - **GitHub**: [davidjerleke/embla-carousel](https://github.com/davidjerleke/embla-carousel)
 - **License**: MIT License
 - **Version**: 8.6.0
 
 ### React DnD
+
 - **Website**: [react-dnd.github.io](https://react-dnd.github.io/)
 - **GitHub**: [react-dnd/react-dnd](https://github.com/react-dnd/react-dnd)
 - **License**: MIT License
 - **Version**: 16.0.1
 
 ### Vaul
+
 - **GitHub**: [emilkowalski/vaul](https://github.com/emilkowalski/vaul)
 - **License**: MIT License
 - **Version**: 1.1.2
@@ -178,15 +201,19 @@ This portfolio website was built using amazing open-source tools, libraries, and
 ## 🌟 Special Thanks
 
 ### Open Source Community
+
 A huge thank you to the entire open-source community for making incredible tools and libraries freely available.
 
 ### Figma Community
+
 Thanks to the Figma community for design inspiration and resources.
 
 ### Font Providers
+
 - **Google Fonts**: For providing high-quality, free web fonts
 
 ### CDN & Hosting
+
 - **Vercel**: For seamless deployment and hosting platform
 - **GitHub**: For code hosting and version control
 
@@ -214,4 +241,4 @@ This project wouldn't be possible without the hard work and dedication of thousa
 **Last Updated**: February 2026  
 **Project**: Futuristic Dark Portfolio Website  
 **Author**: Harsh Kesharwani  
-**Repository**: [Harsh-GitHup/FigmaPortfolioWebsite](https://github.com/Harsh-GitHup/FigmaPortfolioWebsite)
+**Repository**: [Harsh-GitHup/harsh_portfolio](https://github.com/Harsh-GitHup/harsh_portfolio)

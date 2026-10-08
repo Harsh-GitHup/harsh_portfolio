@@ -1,10 +1,13 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import React from "react";
+import { motion } from "motion/react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 
 export const Hero = () => {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+    >
       {/* Background Gradient Mesh */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#39ff14]/20 rounded-full blur-[120px] mix-blend-screen animate-pulse" />
@@ -25,7 +28,9 @@ export const Hero = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#39ff14] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#39ff14]"></span>
             </span>
-            <span className="text-sm font-medium tracking-wide uppercase">Available for work</span>
+            <span className="text-sm font-medium tracking-wide uppercase">
+              Available for work
+            </span>
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-6">
@@ -36,7 +41,8 @@ export const Hero = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Crafting immersive digital experiences with cutting-edge technology and pixel-perfect design.
+            Crafting immersive digital experiences with cutting-edge technology
+            and pixel-perfect design.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

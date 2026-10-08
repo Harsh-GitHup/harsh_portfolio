@@ -1,12 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
-import {
-  Download,
-  ExternalLink,
-  Briefcase,
-  GraduationCap,
-} from "lucide-react";
-import PdfViewer from './PdfViewer';
+import { Download, ExternalLink, Briefcase, GraduationCap } from "lucide-react";
+import PdfViewer from "./PdfViewer";
 
 export const Resume = () => {
   return (
@@ -89,27 +84,27 @@ export const Resume = () => {
 
             {/* Functional Resume Preview Card */}
             <motion.div
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  className="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm p-1"
->
-  {/* Removing the pointer-events-none overlay so users can select text in the PDF */}
-  <div className="relative h-[600px] bg-[#111] rounded-xl overflow-hidden">
-    <PdfViewer fileUrl="/resume.pdf" />
-  </div>
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm p-1"
+            >
+              {/* Removing the pointer-events-none overlay so users can select text in the PDF */}
+              <div className="relative h-[600px] bg-[#111] rounded-xl overflow-hidden">
+                <PdfViewer fileUrl="/resume.pdf" />
+              </div>
 
-  <div className="absolute bottom-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-    <motion.a
-      href="/resume.pdf"
-      target="_blank"
-      whileHover={{ scale: 1.1 }}
-      className="p-3 bg-[#39ff14] text-black rounded-full shadow-lg flex items-center justify-center"
-    >
-      <ExternalLink size={20} />
-    </motion.a>
-  </div>
-</motion.div>
+              <div className="absolute bottom-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <motion.a
+                  href="/resume.pdf"
+                  target="_blank"
+                  whileHover={{ scale: 1.1 }}
+                  className="p-3 bg-[#39ff14] text-black rounded-full shadow-lg flex items-center justify-center"
+                >
+                  <ExternalLink size={20} />
+                </motion.a>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>

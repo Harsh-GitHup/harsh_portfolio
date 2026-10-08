@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { GraduationCap, Award, User } from 'lucide-react';
+import React from "react";
+import { motion } from "motion/react";
+import { GraduationCap, Award, User } from "lucide-react";
 
 export const About = () => {
   return (
@@ -10,7 +10,6 @@ export const About = () => {
 
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center gap-16">
-
           {/* Text Content */}
           <div className="flex-1">
             <motion.div
@@ -24,13 +23,32 @@ export const About = () => {
 
               <div className="prose prose-invert max-w-none text-gray-300 text-lg leading-relaxed space-y-6">
                 <p>
-                  Hello! I'm <span className="text-white font-semibold">Harsh Kesharwani</span>, a passionate software developer with a strong foundation in full-stack web development.
+                  Hello! I'm{" "}
+                  <span className="text-white font-semibold">
+                    Harsh Kesharwani
+                  </span>
+                  , a passionate software developer with a strong foundation in
+                  full-stack web development.
                 </p>
                 <p>
-                  I am a <span className="text-[#39ff14]">B.Tech graduate</span> in Computer Science & Engineering from the <span className="text-white">Corporate Institute of Science & Technology</span>, Batch of 2024. My academic journey provided me with deep insights into algorithms, data structures, and software engineering principles.
+                  I am a <span className="text-[#39ff14]">B.Tech graduate</span>{" "}
+                  in Computer Science & Engineering from the{" "}
+                  <span className="text-white">
+                    Corporate Institute of Science & Technology
+                  </span>
+                  , Batch of 2024. My academic journey provided me with deep
+                  insights into algorithms, data structures, and software
+                  engineering principles.
                 </p>
                 <p>
-                  To further hone my practical skills, I completed comprehensive <span className="text-[#39ff14]">Full Stack Python training</span> at <span className="text-white">Naresh IT</span>, where I mastered modern web technologies including Django, Angular, and database management. I love building scalable applications that solve real-world problems.
+                  To further hone my practical skills, I completed comprehensive{" "}
+                  <span className="text-[#39ff14]">
+                    Full Stack Python training
+                  </span>{" "}
+                  at <span className="text-white">Naresh IT</span>, where I
+                  mastered modern web technologies including Django, Angular,
+                  and database management. I love building scalable applications
+                  that solve real-world problems.
                 </p>
               </div>
 
@@ -63,7 +81,11 @@ export const About = () => {
               <div className="relative w-full h-full rounded-full border-2 border-[#39ff14]/50 bg-black/50 backdrop-blur-sm flex items-center justify-center overflow-hidden">
                 {/* Note: If you have a real photo, replace the Icon above with an img tag: */}
                 {/* <User size={120} className="text-gray-400" /> */}
-                <img src="/harsh.png" alt="Harsh Kesharwani" className="w-full h-full object-contain rounded-full" />
+                <img
+                  src="/harsh.png"
+                  alt="Harsh Kesharwani"
+                  className="w-full h-full object-contain rounded-full"
+                />
               </div>
 
               {/* Orbiting elements for decoration */}
@@ -74,14 +96,23 @@ export const About = () => {
               />
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>
   );
 };
 
-const Card = ({ icon: Icon, title, subtitle, detail }: { icon: any, title: string, subtitle: string, detail: string }) => (
+const Card = ({
+  icon: Icon,
+  title,
+  subtitle,
+  detail,
+}: {
+  icon: any;
+  title: string;
+  subtitle: string;
+  detail: string;
+}) => (
   <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:border-[#39ff14]/30 transition-colors">
     <div className="flex items-start gap-4">
       <div className="p-3 rounded-lg bg-[#39ff14]/10 text-[#39ff14]">

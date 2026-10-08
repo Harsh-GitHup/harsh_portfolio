@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Github, Linkedin, Twitter } from 'lucide-react';
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Menu, X, Github, Linkedin, Twitter } from "lucide-react";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: 'Home', href: '#hero' },
-    { name: 'About', href: '#about' },
-    { name: 'Tech Stack', href: '#tech-stack' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Resume', href: '#resume' },
-    { name: 'Contact', href: '#contact' },
+    { name: "Home", href: "#hero" },
+    { name: "About", href: "#about" },
+    { name: "Tech Stack", href: "#tech-stack" },
+    { name: "Projects", href: "#projects" },
+    { name: "Resume", href: "#resume" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
@@ -57,7 +57,7 @@ export const Header = () => {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-black/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
           >
@@ -73,9 +73,18 @@ export const Header = () => {
                 </a>
               ))}
               <div className="flex gap-6 mt-4 pt-6 border-t border-white/10">
-                <SocialIcon Icon={Github} href="https://github.com/Harsh-GitHup" />
-                <SocialIcon Icon={Linkedin} href="https://www.linkedin.com/in/harshkesharwani" />
-                <SocialIcon Icon={Twitter} href="https://x.com/HarshKesha91325" />
+                <SocialIcon
+                  Icon={Github}
+                  href="https://github.com/Harsh-GitHup"
+                />
+                <SocialIcon
+                  Icon={Linkedin}
+                  href="https://www.linkedin.com/in/harshkesharwani"
+                />
+                <SocialIcon
+                  Icon={Twitter}
+                  href="https://x.com/HarshKesha91325"
+                />
               </div>
             </div>
           </motion.div>
@@ -86,7 +95,12 @@ export const Header = () => {
 };
 
 const SocialIcon = ({ Icon, href }: { Icon: any; href: string }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#39ff14] transition-colors">
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-gray-400 hover:text-[#39ff14] transition-colors"
+  >
     <Icon size={24} />
   </a>
 );

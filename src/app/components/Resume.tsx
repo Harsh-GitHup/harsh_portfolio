@@ -21,8 +21,7 @@ export const Resume = () => {
               My <span className="text-[#39ff14]">Resume</span>
             </h2>
             <p className="text-gray-400 text-lg">
-              A summary of my professional experience and
-              education.
+              A summary of my professional experience and education.
             </p>
           </div>
 
@@ -45,9 +44,7 @@ export const Resume = () => {
               <div className="p-2 bg-blue-500/10 rounded-lg text-blue-400">
                 <GraduationCap size={24} />
               </div>
-              <h3 className="text-2xl font-bold text-white">
-                Education
-              </h3>
+              <h3 className="text-2xl font-bold text-white">Education</h3>
             </div>
 
             <TimelineItem
@@ -62,9 +59,7 @@ export const Resume = () => {
               <div className="p-2 bg-[#39ff14]/10 rounded-lg text-[#39ff14]">
                 <Briefcase size={24} />
               </div>
-              <h3 className="text-2xl font-bold text-white">
-                Experience
-              </h3>
+              <h3 className="text-2xl font-bold text-white">Experience</h3>
             </div>
 
             <TimelineItem
@@ -147,9 +142,7 @@ const TimelineItem = ({
       <span>•</span>
       <span>{period}</span>
     </div>
-    <p className="text-gray-400 leading-relaxed">
-      {description}
-    </p>
+    <p className="text-gray-400 leading-relaxed">{description}</p>
   </motion.div>
 );
 
@@ -159,11 +152,11 @@ const EmbedPdfViewer = ({ fileUrl }: { fileUrl: string }) => {
 
   useEffect(() => {
     // Check if the file actually exists before trying to embed it
-    fetch(fileUrl, { method: 'HEAD' })
+    fetch(fileUrl, { method: "HEAD" })
       .then((res) => {
         // If it's not a PDF or returns a 404, set error
-        const contentType = res.headers.get('content-type');
-        if (!res.ok || (contentType && !contentType.includes('pdf'))) {
+        const contentType = res.headers.get("content-type");
+        if (!res.ok || (contentType && !contentType.includes("pdf"))) {
           setHasError(true);
         }
       })
@@ -172,7 +165,11 @@ const EmbedPdfViewer = ({ fileUrl }: { fileUrl: string }) => {
   }, [fileUrl]);
 
   if (isLoading) {
-    return <div className="h-full w-full bg-[#0a0a0a] flex items-center justify-center text-[#39ff14]">Loading...</div>;
+    return (
+      <div className="h-full w-full bg-[#0a0a0a] flex items-center justify-center text-[#39ff14]">
+        Loading...
+      </div>
+    );
   }
 
   if (hasError) {
@@ -181,7 +178,9 @@ const EmbedPdfViewer = ({ fileUrl }: { fileUrl: string }) => {
         <div className="p-4 bg-red-500/10 rounded-full text-red-500 mb-4">
           <FileWarning size={48} />
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">Resume Preview Unavailable</h3>
+        <h3 className="text-xl font-bold text-white mb-2">
+          Resume Preview Unavailable
+        </h3>
         <p className="text-gray-400 text-sm max-w-[250px]">
           We couldn't find the file at public{fileUrl}.
         </p>
