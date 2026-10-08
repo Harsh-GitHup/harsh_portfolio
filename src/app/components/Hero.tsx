@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import { profile } from "../data/profile";
 
 export const Hero = () => {
   return (
@@ -34,15 +35,14 @@ export const Hero = () => {
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-6">
-            Building the <br />
+            {profile.tagline.split(' ').slice(0, 2).join(' ')} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#39ff14] to-emerald-600">
-              Future Web
+              {profile.tagline.split(' ').slice(2).join(' ')}
             </span>
           </h1>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Crafting immersive digital experiences with cutting-edge technology
-            and pixel-perfect design.
+            {profile.subtitle}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

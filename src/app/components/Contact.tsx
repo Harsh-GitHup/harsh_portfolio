@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
+import { profile } from "../data/profile";
 
 export const Contact = () => {
   // Added 'error' state for better UX
@@ -69,10 +70,10 @@ export const Contact = () => {
                 <div>
                   <h4 className="font-semibold text-white">Email Me</h4>
                   <a
-                    href="mailto:harshkesharwani037@gmail.com"
+                    href={`mailto:${profile.email}`}
                     className="hover:text-[#39ff14] transition-colors"
                   >
-                    harshkesharwani037@gmail.com
+                    {profile.email}
                   </a>
                 </div>
               </div>

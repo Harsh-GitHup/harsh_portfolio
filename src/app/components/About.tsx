@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
-import { GraduationCap, Award, User } from "lucide-react";
+import * as LucideIcons from "lucide-react";
+import { about, profile } from "../data/profile";
 
 export const About = () => {
   return (
@@ -22,49 +23,24 @@ export const About = () => {
               </h2>
 
               <div className="prose prose-invert max-w-none text-gray-300 text-lg leading-relaxed space-y-6">
-                <p>
-                  Hello! I'm{" "}
-                  <span className="text-white font-semibold">
-                    Harsh Kesharwani
-                  </span>
-                  , a passionate software developer with a strong foundation in
-                  full-stack web development.
-                </p>
-                <p>
-                  I am a <span className="text-[#39ff14]">B.Tech graduate</span>{" "}
-                  in Computer Science & Engineering from the{" "}
-                  <span className="text-white">
-                    Corporate Institute of Science & Technology
-                  </span>
-                  , Batch of 2024. My academic journey provided me with deep
-                  insights into algorithms, data structures, and software
-                  engineering principles.
-                </p>
-                <p>
-                  To further hone my practical skills, I completed comprehensive{" "}
-                  <span className="text-[#39ff14]">
-                    Full Stack Python training
-                  </span>{" "}
-                  at <span className="text-white">Naresh IT</span>, where I
-                  mastered modern web technologies including Django, Angular,
-                  and database management. I love building scalable applications
-                  that solve real-world problems.
-                </p>
+                {about.paragraphs.map((para, i) => (
+                  <p key={i} dangerouslySetInnerHTML={{ __html: para }} />
+                ))}
               </div>
 
               <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <Card
-                  icon={GraduationCap}
-                  title="Education"
-                  subtitle="B.Tech in CSE (2024)"
-                  detail="Corporate Institute of Science & Technology"
-                />
-                <Card
-                  icon={Award}
-                  title="Certification"
-                  subtitle="Full Stack Python"
-                  detail="Naresh IT"
-                />
+                {about.cards.map((card, i) => {
+                  const Icon = LucideIcons[card.iconName as keyof typeof LucideIcons];
+                  return (
+                    <Card
+                      key={i}
+                      icon={Icon || LucideIcons.HelpCircle}
+                      title={card.title}
+                      subtitle={card.subtitle}
+                      detail={card.detail}
+                    />
+                  );
+                })}
               </div>
             </motion.div>
           </div>
@@ -82,8 +58,8 @@ export const About = () => {
                 {/* Note: If you have a real photo, replace the Icon above with an img tag: */}
                 {/* <User size={120} className="text-gray-400" /> */}
                 <img
-                  src="/harsh.png"
-                  alt="Harsh Kesharwani"
+                  src={about.image}
+                  alt={profile.name}
                   className="w-full h-full object-contain rounded-full"
                 />
               </div>

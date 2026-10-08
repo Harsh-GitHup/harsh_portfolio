@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Github, Linkedin, Twitter } from "lucide-react";
+import { profile } from "../data/profile";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,15 +76,15 @@ export const Header = () => {
               <div className="flex gap-6 mt-4 pt-6 border-t border-white/10">
                 <SocialIcon
                   Icon={Github}
-                  href="https://github.com/Harsh-GitHup"
+                  href={profile.socials.github}
                 />
                 <SocialIcon
                   Icon={Linkedin}
-                  href="https://www.linkedin.com/in/harshkesharwani"
+                  href={profile.socials.linkedin}
                 />
                 <SocialIcon
                   Icon={Twitter}
-                  href="https://x.com/HarshKesha91325"
+                  href={profile.socials.twitter}
                 />
               </div>
             </div>

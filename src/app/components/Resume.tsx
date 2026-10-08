@@ -7,6 +7,7 @@ import {
   GraduationCap,
   FileWarning,
 } from "lucide-react";
+import { profile, education, experience } from "../data/profile";
 
 export const Resume = () => {
   return (
@@ -26,8 +27,8 @@ export const Resume = () => {
           </div>
 
           <motion.a
-            href="/resume.pdf"
-            download="Harsh_Kesharwani_Resume.pdf"
+            href={profile.resumeFile}
+            download={`${profile.name.replace(" ", "_")}_Resume.pdf`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="flex items-center gap-3 px-6 py-3 bg-[#39ff14] text-black font-bold rounded-full hover:bg-[#32d911] transition-colors shadow-[0_0_20px_rgba(57,255,20,0.3)] hover:shadow-[0_0_30px_rgba(57,255,20,0.5)]"
@@ -47,12 +48,9 @@ export const Resume = () => {
               <h3 className="text-2xl font-bold text-white">Education</h3>
             </div>
 
-            <TimelineItem
-              role="Bachelor of Technology in Computer Science"
-              company="RGPV University"
-              period="2020 - 2024"
-              description="Specialized in Software Development and Database Systems. Graduated with Honors."
-            />
+            {education.map((item, index) => (
+              <TimelineItem key={index} {...item} />
+            ))}
 
             {/* Experience Column */}
             <div className="flex items-center gap-3 mb-8">
@@ -62,26 +60,9 @@ export const Resume = () => {
               <h3 className="text-2xl font-bold text-white">Experience</h3>
             </div>
 
-            <TimelineItem
-              role="Python Intern"
-              company="Oasis Infobyte"
-              period="Nov 2023 - Dec 2023"
-              description="Engineered a suite of Python applications including a voice assistant, a BMI calculator, and a secure random password generator to streamline task automation and data processing."
-            />
-
-            <TimelineItem
-              role="Web Development Intern"
-              company="Cognifyz Technologies"
-              period="Sep 2023 - Oct 2023"
-              description="Developed responsive web components and landing pages using HTML, CSS, and JavaScript, focusing on interactive UI elements and cross-device compatibility."
-            />
-
-            <TimelineItem
-              role="Python trainee"
-              company="SmartInternz"
-              period="Aug 2021 - Sep 2023"
-              description="Engineered a machine learning pipeline to process large-scale placement datasets, uncovering hidden patterns in student profiles and academic performance using predictive algorithms."
-            />
+            {experience.map((item, index) => (
+              <TimelineItem key={index} {...item} />
+            ))}
           </div>
 
           {/* Preview Column */}
@@ -96,13 +77,13 @@ export const Resume = () => {
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 z-10 pointer-events-none" />
 
               <div className="relative h-[790px] bg-white rounded-xl overflow-hidden">
-                <EmbedPdfViewer fileUrl="/resume.pdf" />
+                <EmbedPdfViewer fileUrl={profile.resumeFile} />
               </div>
 
               {/* External Link Button - Since internal controls are hidden */}
               <div className="absolute bottom-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <motion.a
-                  href="/resume.pdf"
+                  href={profile.resumeFile}
                   target="_blank"
                   whileHover={{ scale: 1.1 }}
                   className="p-3 bg-[#39ff14] text-black rounded-full shadow-lg flex items-center justify-center"

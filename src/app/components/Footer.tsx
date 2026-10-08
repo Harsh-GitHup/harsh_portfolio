@@ -1,5 +1,6 @@
 import React from "react";
 import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { profile } from "../data/profile";
 
 export const Footer = () => {
   return (
@@ -7,7 +8,7 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
           <p className="text-gray-500">
-            © 2026 Dev Portfolio. All rights reserved.
+            © {new Date().getFullYear()} Dev Portfolio. All rights reserved.
           </p>
 
           {/* Logo / Brand - Centered */}
@@ -19,19 +20,19 @@ export const Footer = () => {
           {/* Social Links */}
           <div className="flex gap-4">
             <SocialLink
-              href="https://github.com/Harsh-GitHup"
+              href={profile.socials.github}
               icon={<Github size={20} />}
             />
             <SocialLink
-              href="https://www.linkedin.com/in/harshkesharwani"
+              href={profile.socials.linkedin}
               icon={<Linkedin size={20} />}
             />
             <SocialLink
-              href="https://x.com/HarshKesha91325"
+              href={profile.socials.twitter}
               icon={<Twitter size={20} />}
             />
             <SocialLink
-              href="mailto:harshkesharwani037@gmail.com"
+              href={`mailto:${profile.email}`}
               icon={<Mail size={20} />}
             />
           </div>
