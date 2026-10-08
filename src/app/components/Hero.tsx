@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "motion/react";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { profile } from "../data/profile";

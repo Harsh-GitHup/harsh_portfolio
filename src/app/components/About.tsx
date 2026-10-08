@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "motion/react";
 import * as LucideIcons from "lucide-react";
 import { about, profile } from "../data/profile";
