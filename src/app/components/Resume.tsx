@@ -76,30 +76,80 @@ export const Resume = () => {
           </div>
 
           {/* Preview Column */}
-          <div className="space-y-12">
-            {/* Resume Preview Card */}
+          <div className="flex flex-col">
+            <div className="flex items-center justify-between gap-3 mb-6">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-[#39ff14]/10 rounded-lg text-[#39ff14]">
+                  <FileText size={24} />
+                </div>
+                <h3 className="text-2xl font-bold text-white">Preview</h3>
+              </div>
+
+              {/* Quick direct PDF link */}
+              <a
+                href={profile.resumeFile}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-mono text-[#39ff14] hover:underline flex items-center gap-1.5"
+                title="Open full PDF document in a new tab"
+              >
+                <span>Full PDF</span>
+                <ExternalLink size={13} />
+              </a>
+            </div>
+
+            {/* Responsive Glassmorphic Resume Preview Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-md p-3 sm:p-4 flex flex-col shadow-2xl shadow-black/80 hover:border-[#39ff14]/30 transition-all duration-300"
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 z-10 pointer-events-none" />
-
-              <div className="relative h-[790px] bg-white rounded-xl overflow-hidden">
-                <EmbedPdfViewer fileUrl={profile.resumeFile} />
+              {/* Card HUD Toolbar Header */}
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10 text-xs font-mono">
+                <div className="flex items-center gap-2 text-gray-300 min-w-0">
+                  <span className="relative flex h-2 w-2 shrink-0">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#39ff14] opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#39ff14]" />
+                  </span>
+                  <span className="truncate font-medium" title={resumeFileName}>
+                    {resumeFileName}
+                  </span>
+                </div>
+                <span className="text-gray-500 hidden sm:inline shrink-0">
+                  1 Page • PDF
+                </span>
               </div>
 
-              {/* External Link Button - Since internal controls are hidden */}
-              <div className="absolute bottom-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <motion.a
+              {/* Responsive Resume Embed Housing */}
+              <div className="relative w-full h-[480px] sm:h-[600px] lg:h-[780px] rounded-xl overflow-hidden bg-[#0c0c0c]">
+                <EmbedPdfViewer fileUrl={profile.resumeFile} />
+
+                {/* Subtle bottom fade gradient */}
+                <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-[#0c0c0c]/80 via-[#0c0c0c]/20 to-transparent pointer-events-none" />
+              </div>
+
+              {/* Action Buttons Bar */}
+              <div className="mt-3.5 pt-3 border-t border-white/10 flex items-center gap-3">
+                <a
                   href={profile.resumeFile}
                   target="_blank"
-                  whileHover={{ scale: 1.1 }}
-                  className="p-3 bg-[#39ff14] text-black rounded-full shadow-lg flex items-center justify-center"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-2.5 px-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#39ff14]/50 hover:bg-[#39ff14]/10 text-white text-xs sm:text-sm font-mono font-medium transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  title="Open full PDF document in a new tab"
                 >
-                  <ExternalLink size={20} />
-                </motion.a>
+                  <ExternalLink size={15} className="text-[#39ff14]" />
+                  <span>View PDF</span>
+                </a>
+                <a
+                  href={profile.resumeFile}
+                  download={resumeFileName}
+                  className="flex-1 py-2.5 px-4 rounded-xl bg-[#39ff14] text-black text-xs sm:text-sm font-mono font-bold hover:bg-[#32d911] transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(57,255,20,0.3)] cursor-pointer"
+                  title="Download resume as PDF"
+                >
+                  <Download size={15} />
+                  <span>Download</span>
+                </a>
               </div>
             </motion.div>
           </div>
@@ -202,15 +252,12 @@ const EmbedPdfViewer = ({ fileUrl }: { fileUrl: string }) => {
   }
 
   return (
-    <div className="relative w-full h-full overflow-hidden bg-[#111] rounded-xl">
-      <embed
-        src={fileUrl}
-        type="application/pdf"
-        width="100%"
-        height="110%"
-        className="absolute top-[-56px] left-0"
+    <div className="relative w-full h-full overflow-hidden bg-[#0c0c0c] rounded-xl [color-scheme:dark]">
+      <iframe
+        src={`${fileUrl}#toolbar=0&navpanes=0`}
+        className="w-[calc(100%+32px)] h-full border-0 bg-white max-w-none block"
+        title="Resume PDF"
       />
-      <div className="absolute top-0 left-0 w-full h-12 z-10 bg-transparent" />
     </div>
   );
 };
