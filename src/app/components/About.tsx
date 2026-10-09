@@ -1,5 +1,6 @@
-import { motion } from "motion/react";
-import { GraduationCap, Award, HelpCircle } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { GraduationCap, Award, HelpCircle, User, Sparkles } from "lucide-react";
 import { about, profile } from "../data/profile";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
@@ -8,6 +9,8 @@ const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
 };
 
 export const About = () => {
+  const [avatarMode, setAvatarMode] = useState<"real" | "cyber">("real");
+
   return (
     <section id="about" className="py-24 bg-[#050505] relative overflow-hidden">
       {/* Background decoration */}
@@ -54,50 +57,124 @@ export const About = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/3 flex justify-center"
+            className="w-full md:w-1/3 flex flex-col items-center justify-center"
           >
-            <div className="relative w-72 h-72 md:w-84 md:h-84">
+            <div className="relative w-72 h-72 md:w-84 md:h-84 group">
               {/* Pulsing ambient neon aura */}
-              <div className="absolute inset-0 bg-[#39ff14]/20 rounded-full blur-2xl animate-pulse" />
+              <div className="absolute inset-0 bg-[#39ff14]/20 rounded-full blur-2xl animate-pulse pointer-events-none" />
 
               {/* Outer rotating dashed cyber-ring */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="absolute -inset-5 border border-[#39ff14]/25 rounded-full border-dashed"
+                className="absolute -inset-5 border-2 border-[#39ff14]/25 rounded-full border-dashed pointer-events-none"
               />
 
               {/* Secondary glowing tech boundary ring */}
-              <div className="absolute -inset-2 border border-white/10 rounded-full" />
+              <div className="absolute -inset-2 border-2 border-white/10 rounded-full pointer-events-none" />
 
-              {/* Main Photo Housing */}
-              <div className="relative w-full h-full rounded-full border-2 border-[#39ff14]/60 bg-gradient-to-b from-[#0a1a08] via-[#050505] to-[#000] backdrop-blur-md flex items-center justify-center overflow-hidden shadow-[0_0_35px_rgba(57,255,20,0.2)]">
+              {/* Main Photo Housing - Interactive click toggles avatar */}
+              <div
+                onClick={() => setAvatarMode((prev) => (prev === "real" ? "cyber" : "real"))}
+                title="Click to switch avatar mode"
+                className="relative w-full h-full rounded-full border-2 border-[#39ff14]/60 bg-gradient-to-b from-[#0a1a08] via-[#050505] to-[#000] backdrop-blur-md flex items-center justify-center overflow-hidden shadow-[0_0_35px_rgba(57,255,20,0.2)] cursor-pointer select-none transition-transform duration-300 group-hover:scale-[1.02]"
+              >
                 {/* Radial spotlight behind the head */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(57,255,20,0.25)_0%,_transparent_70%)] pointer-events-none" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(57,255,20,0.25)_0%,_transparent_70%)] pointer-events-none z-0" />
 
-                {/* Profile Image - scaled & aligned to fill nicely */}
-                <img
-                  src={about.image}
-                  alt={profile.name}
-                  className="w-full h-full object-cover object-top scale-110 translate-y-3 contrast-[1.06] brightness-[0.98] drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)]"
-                />
+                {/* Animated Avatar switch */}
+                <AnimatePresence mode="wait">
+                  {avatarMode === "real" ? (
+                    <motion.div
+                      key="real"
+                      initial={{ opacity: 0, scale: 0.96 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 1.04 }}
+                      transition={{ duration: 0.3 }}
+                      className="relative w-full h-full"
+                    >
+                      {/* Real Photo with Matched Cyberpunk Studio View */}
+                      <img
+                        src={about.image}
+                        alt={`${profile.name} - Real Photo`}
+                        className="w-full h-full object-cover object-[center_30%] scale-105 contrast-[1.04] brightness-[0.98] drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)]"
+                      />
+                      {/* Ambient bottom vignette */}
+                      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none" />
+                      {/* Soft Cyber Ambient Rim Overlay */}
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#39ff14]/15 via-transparent to-[#39ff14]/10 mix-blend-screen pointer-events-none" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="cyber"
+                      initial={{ opacity: 0, scale: 0.96 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 1.04 }}
+                      transition={{ duration: 0.3 }}
+                      className="relative w-full h-full"
+                    >
+                      {/* Stylized 3D Cyberpunk Developer Avatar */}
+                      <img
+                        src={about.avatar3d || "/avatar-3d.jpg"}
+                        alt={`${profile.name} - 3D Cyberpunk Avatar`}
+                        className="w-full h-full object-cover object-center contrast-[1.04] brightness-[1.0] drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)]"
+                      />
+                      {/* Ambient bottom vignette */}
+                      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none" />
+                      {/* Holographic rim overlay */}
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#39ff14]/15 via-transparent to-[#39ff14]/10 mix-blend-screen pointer-events-none" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-                {/* Bottom Torso Fade - eliminates harsh cut */}
-                <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black via-black/75 to-transparent pointer-events-none" />
-
-                {/* Soft Cyber Ambient Rim Overlay */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#39ff14]/15 via-transparent to-[#39ff14]/10 mix-blend-screen pointer-events-none" />
+                {/* Hover Cue */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center backdrop-blur-[1px] pointer-events-none">
+                  <div className="px-3 py-1.5 rounded-full bg-black/85 border border-[#39ff14]/60 text-[#39ff14] text-xs font-mono font-medium flex items-center gap-1.5 shadow-lg shadow-black/80">
+                    <Sparkles size={12} />
+                    <span>Switch View</span>
+                  </div>
+                </div>
               </div>
 
               {/* Floating Cyberpunk HUD Tag */}
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#0a0a0a]/90 border border-[#39ff14]/40 shadow-xl shadow-black/90 backdrop-blur-md flex items-center gap-2 whitespace-nowrap z-10">
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#0a0a0a]/95 border border-[#39ff14]/40 shadow-xl shadow-black/90 backdrop-blur-md flex items-center gap-2 whitespace-nowrap z-10 pointer-events-none">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#39ff14] opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#39ff14]" />
                 </span>
                 <span className="text-[11px] font-mono tracking-widest text-gray-200 uppercase font-semibold">
-                  Dev // Harsh
+                  {avatarMode === "real" ? "Identity // Real" : "Avatar // 3D Cyber"}
                 </span>
+              </div>
+            </div>
+
+            {/* Futuristic Mode Switcher Pills */}
+            <div className="mt-8 flex items-center justify-center">
+              <div className="p-1 rounded-full bg-[#0a0a0a]/90 border border-white/10 backdrop-blur-md flex items-center gap-1 shadow-xl shadow-black/80">
+                <button
+                  type="button"
+                  onClick={() => setAvatarMode("real")}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all duration-300 flex items-center gap-1.5 cursor-pointer ${
+                    avatarMode === "real"
+                      ? "bg-[#39ff14] text-black shadow-[0_0_15px_rgba(57,255,20,0.4)] font-bold"
+                      : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  <User size={13} />
+                  <span>Real Photo</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAvatarMode("cyber")}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all duration-300 flex items-center gap-1.5 cursor-pointer ${
+                    avatarMode === "cyber"
+                      ? "bg-[#39ff14] text-black shadow-[0_0_15px_rgba(57,255,20,0.4)] font-bold"
+                      : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  <Sparkles size={13} />
+                  <span>3D Cyber</span>
+                </button>
               </div>
             </div>
           </motion.div>

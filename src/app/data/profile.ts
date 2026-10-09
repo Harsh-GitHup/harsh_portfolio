@@ -31,7 +31,8 @@ export const about = {
       detail: "Naresh IT"
     }
   ],
-  image: "/harsh.png"
+  image: "/harsh.jpg",
+  avatar3d: "/avatar-3d.jpg"
 };
 
 export const education = [

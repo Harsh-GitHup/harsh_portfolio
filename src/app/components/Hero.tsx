@@ -10,42 +10,87 @@ export const Hero = () => {
     const STORAGE_KEY = "harsh_portfolio_profile_views";
     const SESSION_KEY = "harsh_portfolio_session_viewed";
     const BASE_VIEWS = 1420;
+    const COUNTER_KEY = "harsh_kesharwani_portfolio_views";
 
-    let count = BASE_VIEWS;
+    let isMounted = true;
+
+    const startCountAnimation = (targetCount: number) => {
+      const duration = 1200;
+      const steps = 30;
+      const stepDuration = duration / steps;
+      let step = 0;
+
+      const timer = setInterval(() => {
+        if (!isMounted) {
+          clearInterval(timer);
+          return;
+        }
+        step++;
+        const progress = step / steps;
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        setAnimatedViews(Math.floor(easeOut * targetCount));
+
+        if (step >= steps) {
+          clearInterval(timer);
+          setAnimatedViews(targetCount);
+        }
+      }, stepDuration);
+    };
+
+    // Load initial cached or base count while fetching live data
+    let localCount = BASE_VIEWS;
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
       const parsed = parseInt(stored, 10);
       if (!isNaN(parsed) && parsed >= BASE_VIEWS) {
-        count = parsed;
+        localCount = parsed;
       }
     }
+    setAnimatedViews(localCount);
 
-    // Increment count once per session
-    if (!sessionStorage.getItem(SESSION_KEY)) {
-      count += 1;
-      sessionStorage.setItem(SESSION_KEY, "true");
-      localStorage.setItem(STORAGE_KEY, count.toString());
-    }
+    const fetchRealTimeViews = async () => {
+      try {
+        const isNewSession = !sessionStorage.getItem(SESSION_KEY);
+        // Hit endpoint increments globally on new session, or gets latest value on repeat views
+        const endpoint = isNewSession
+          ? `https://countapi.mileshilliard.com/api/v1/hit/${COUNTER_KEY}`
+          : `https://countapi.mileshilliard.com/api/v1/get/${COUNTER_KEY}`;
 
-    // Smooth count-up animation
-    const duration = 1200;
-    const steps = 30;
-    const stepDuration = duration / steps;
-    let step = 0;
+        const res = await fetch(endpoint);
+        if (!res.ok) throw new Error("Counter API network response was not ok");
 
-    const timer = setInterval(() => {
-      step++;
-      const progress = step / steps;
-      const easeOut = 1 - Math.pow(1 - progress, 3);
-      setAnimatedViews(Math.floor(easeOut * count));
-
-      if (step >= steps) {
-        clearInterval(timer);
-        setAnimatedViews(count);
+        const data = await res.json();
+        if (data && typeof data.value === "number") {
+          const liveTotal = BASE_VIEWS + data.value;
+          if (isNewSession) {
+            sessionStorage.setItem(SESSION_KEY, "true");
+          }
+          localStorage.setItem(STORAGE_KEY, liveTotal.toString());
+          if (isMounted) {
+            startCountAnimation(liveTotal);
+          }
+          return;
+        }
+      } catch (err) {
+        console.warn("Real-time view counter fallback to local storage:", err);
       }
-    }, stepDuration);
 
-    return () => clearInterval(timer);
+      // Graceful offline fallback
+      if (!sessionStorage.getItem(SESSION_KEY)) {
+        localCount += 1;
+        sessionStorage.setItem(SESSION_KEY, "true");
+        localStorage.setItem(STORAGE_KEY, localCount.toString());
+      }
+      if (isMounted) {
+        startCountAnimation(localCount);
+      }
+    };
+
+    fetchRealTimeViews();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -87,15 +132,17 @@ export const Hero = () => {
                 <span className="text-white font-bold">
                   {animatedViews > 0 ? animatedViews.toLocaleString() : "..."}
                 </span>
-                <span className="text-gray-400 ml-1.5 font-sans">Profile Views</span>
+                <span className="text-gray-400 ml-1.5 font-sans">
+                  Profile Views
+                </span>
               </span>
             </div>
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-6">
-            {profile.tagline.split(' ').slice(0, 2).join(' ')} <br />
+            {profile.tagline.split(" ").slice(0, 2).join(" ")} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#39ff14] to-emerald-600">
-              {profile.tagline.split(' ').slice(2).join(' ')}
+              {profile.tagline.split(" ").slice(2).join(" ")}
             </span>
           </h1>
 
