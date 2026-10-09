@@ -118,10 +118,13 @@ export const Contact = () => {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* IMPORTANT: Ensure each input has a 'name' attribute 
-                    matching what Web3Forms expects.
-                */}
+              <form
+                onSubmit={handleSubmit}
+                onChange={() => {
+                  if (formState === "error") setFormState("idle");
+                }}
+                className="space-y-6"
+              >
                 <div className="space-y-2">
                   <label
                     htmlFor="name"
@@ -133,6 +136,7 @@ export const Contact = () => {
                     type="text"
                     id="name"
                     name="name"
+                    autoComplete="name"
                     required
                     className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:outline-none focus:border-[#39ff14] focus:ring-1 focus:ring-[#39ff14] transition-all placeholder:text-gray-600"
                     placeholder="John Doe"
@@ -150,6 +154,7 @@ export const Contact = () => {
                     type="email"
                     id="email"
                     name="email"
+                    autoComplete="email"
                     required
                     className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:outline-none focus:border-[#39ff14] focus:ring-1 focus:ring-[#39ff14] transition-all placeholder:text-gray-600"
                     placeholder="john@example.com"
@@ -167,6 +172,7 @@ export const Contact = () => {
                     type="tel"
                     id="phone"
                     name="phone"
+                    autoComplete="tel"
                     required
                     className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:outline-none focus:border-[#39ff14] focus:ring-1 focus:ring-[#39ff14] transition-all placeholder:text-gray-600"
                     placeholder="+91 0000000000"

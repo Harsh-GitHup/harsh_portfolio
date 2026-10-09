@@ -54,9 +54,9 @@ export const TechStack = () => {
                     >
                       <tech.icon size={28} />
                     </div>
-                    <h3 className="text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">
+                    <span className="text-sm font-semibold text-gray-200 group-hover:text-white transition-colors block">
                       {tech.name}
-                    </h3>
+                    </span>
                   </motion.div>
                 ))}
               </div>

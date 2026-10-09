@@ -58,7 +58,7 @@ export const experience = [
     description: "Developed responsive web components and landing pages using HTML, CSS, and JavaScript, focusing on interactive UI elements and cross-device compatibility.",
   },
   {
-    role: "Python trainee",
+    role: "Python Trainee",
     company: "SmartInternz",
     period: "Aug 2021 - Sep 2023",
     description: "Engineered a machine learning pipeline to process large-scale placement datasets, uncovering hidden patterns in student profiles and academic performance using predictive algorithms.",

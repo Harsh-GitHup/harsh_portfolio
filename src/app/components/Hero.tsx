@@ -177,7 +177,13 @@ export const Hero = () => {
         transition={{ repeat: Infinity, duration: 2 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500"
       >
-        <ChevronDown size={32} />
+        <a
+          href="#about"
+          aria-label="Scroll to About section"
+          className="p-2 block hover:text-[#39ff14] transition-colors cursor-pointer"
+        >
+          <ChevronDown size={32} />
+        </a>
       </motion.div>
     </section>
   );

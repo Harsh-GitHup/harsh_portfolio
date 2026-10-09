@@ -6,10 +6,13 @@ import {
   Briefcase,
   GraduationCap,
   FileWarning,
+  FileText,
 } from "lucide-react";
 import { profile, education, experience } from "../data/profile";
 
 export const Resume = () => {
+  const resumeFileName = `${profile.name.replace(/\s+/g, "_")}_Resume.pdf`;
+
   return (
     <section
       id="resume"
@@ -28,10 +31,11 @@ export const Resume = () => {
 
           <motion.a
             href={profile.resumeFile}
-            download={`${profile.name.replace(" ", "_")}_Resume.pdf`}
+            download={resumeFileName}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="flex items-center gap-3 px-6 py-3 bg-[#39ff14] text-black font-bold rounded-full hover:bg-[#32d911] transition-colors shadow-[0_0_20px_rgba(57,255,20,0.3)] hover:shadow-[0_0_30px_rgba(57,255,20,0.5)]"
+            aria-label="Download CV"
           >
             <Download size={20} />
             Download CV
@@ -49,7 +53,10 @@ export const Resume = () => {
             </div>
 
             {education.map((item, index) => (
-              <TimelineItem key={index} {...item} />
+              <TimelineItem
+                key={`${item.company}-${item.role}-${index}`}
+                {...item}
+              />
             ))}
 
             {/* Experience Column */}
@@ -61,7 +68,10 @@ export const Resume = () => {
             </div>
 
             {experience.map((item, index) => (
-              <TimelineItem key={index} {...item} />
+              <TimelineItem
+                key={`${item.company}-${item.role}-${index}`}
+                {...item}
+              />
             ))}
           </div>
 
@@ -72,7 +82,7 @@ export const Resume = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm p-1 mt-[45px]"
+              className="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-md p-3 sm:p-4 flex flex-col shadow-2xl shadow-black/80 hover:border-[#39ff14]/30 transition-all duration-300"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 z-10 pointer-events-none" />
 
@@ -132,39 +142,61 @@ const EmbedPdfViewer = ({ fileUrl }: { fileUrl: string }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if the file actually exists before trying to embed it
+    let isMounted = true;
+    setIsLoading(true);
+    setHasError(false);
+
+    // Validate that the file is reachable
     fetch(fileUrl, { method: "HEAD" })
       .then((res) => {
-        // If it's not a PDF or returns a 404, set error
-        const contentType = res.headers.get("content-type");
-        if (!res.ok || (contentType && !contentType.includes("pdf"))) {
-          setHasError(true);
+        const contentType = res.headers.get("content-type") || "";
+        if (!res.ok || contentType.includes("text/html")) {
+          if (isMounted) setHasError(true);
         }
       })
-      .catch(() => setHasError(true))
-      .finally(() => setIsLoading(false));
+      .catch(() => {
+        if (isMounted) setHasError(true);
+      })
+      .finally(() => {
+        if (isMounted) setIsLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [fileUrl]);
 
   if (isLoading) {
     return (
-      <div className="h-full w-full bg-[#0a0a0a] flex items-center justify-center text-[#39ff14]">
-        Loading...
+      <div className="h-full w-full bg-[#0c0c0c] flex flex-col items-center justify-center gap-3 text-[#39ff14]">
+        <div className="w-8 h-8 border-2 border-[#39ff14]/30 border-t-[#39ff14] rounded-full animate-spin" />
+        <span className="font-mono text-xs text-gray-400">
+          Loading Resume...
+        </span>
       </div>
     );
   }
 
   if (hasError) {
     return (
-      <div className="flex flex-col items-center justify-center h-full w-full p-8 text-center bg-[#0a0a0a]">
+      <div className="flex flex-col items-center justify-center h-full w-full p-8 text-center bg-[#0c0c0c]">
         <div className="p-4 bg-red-500/10 rounded-full text-red-500 mb-4">
-          <FileWarning size={48} />
+          <FileWarning size={40} />
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">
+        <h3 className="text-lg font-bold text-white mb-2">
           Resume Preview Unavailable
         </h3>
-        <p className="text-gray-400 text-sm max-w-[250px]">
-          We couldn't find the file at public{fileUrl}.
+        <p className="text-gray-400 text-xs max-w-[250px] mb-4">
+          Unable to preview PDF document directly.
         </p>
+        <a
+          href={fileUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-4 py-2 bg-[#39ff14] text-black text-xs font-mono font-bold rounded-lg hover:bg-[#32d911] transition-colors"
+        >
+          Open Document
+        </a>
       </div>
     );
   }

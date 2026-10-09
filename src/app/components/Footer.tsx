@@ -12,28 +12,36 @@ export const Footer = () => {
           </p>
 
           {/* Logo / Brand - Centered */}
-          <div className="text-2xl font-bold tracking-tighter">
+          <a
+            href="#hero"
+            aria-label="Harsh Kesharwani Portfolio Home"
+            className="text-2xl font-bold tracking-tighter hover:opacity-90 transition-opacity cursor-pointer"
+          >
             <span className="text-white">HARSH</span>
             <span className="text-[#39ff14]">.DEV</span>
-          </div>
+          </a>
 
           {/* Social Links */}
           <div className="flex gap-4">
             <SocialLink
               href={profile.socials.github}
               icon={<Github size={20} />}
+              label="GitHub"
             />
             <SocialLink
               href={profile.socials.linkedin}
               icon={<Linkedin size={20} />}
+              label="LinkedIn"
             />
             <SocialLink
               href={profile.socials.twitter}
               icon={<Twitter size={20} />}
+              label="Twitter / X"
             />
             <SocialLink
               href={`mailto:${profile.email}`}
               icon={<Mail size={20} />}
+              label="Email"
             />
           </div>
         </div>
@@ -45,14 +53,18 @@ export const Footer = () => {
 const SocialLink = ({
   href,
   icon,
+  label,
 }: {
   href: string;
   icon: React.ReactNode;
+  label: string;
 }) => {
   const isMailto = href.startsWith("mailto:");
   return (
     <a
       href={href}
+      aria-label={label}
+      title={label}
       {...(!isMailto && { target: "_blank", rel: "noopener noreferrer" })}
       className="p-3 bg-white/5 rounded-full text-gray-400 hover:text-[#39ff14] hover:bg-white/10 transition-all hover:scale-110"
     >

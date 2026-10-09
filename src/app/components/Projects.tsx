@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowUpRight,
@@ -7,9 +7,50 @@ import {
   ExternalLink,
   ChevronLeft,
   ChevronRight,
+  Code,
 } from "lucide-react";
 
 import { projects } from "../data/projects";
+
+const ProjectImage = ({
+  src,
+  alt,
+  className = "",
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) => {
+  const [error, setError] = useState(false);
+
+  if (!src || error) {
+    return (
+      <div
+        className={`bg-gradient-to-br from-[#111c10] via-[#0d140c] to-[#050505] flex flex-col items-center justify-center text-center p-6 border border-[#39ff14]/20 ${className}`}
+      >
+        <div className="w-10 h-10 rounded-full bg-[#39ff14]/10 text-[#39ff14] flex items-center justify-center mb-2">
+          <Code className="w-5 h-5" />
+        </div>
+        <span className="font-mono text-xs uppercase tracking-wider text-gray-300 font-semibold mb-1">
+          {alt}
+        </span>
+        <span className="text-[11px] text-[#39ff14]/70 font-mono">
+          Project Preview
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      onError={() => setError(true)}
+      className={className}
+    />
+  );
+};
 
 export const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -17,6 +58,26 @@ export const Projects = () => {
     (typeof projects)[0] | null
   >(null);
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedProject(null);
+      }
+    };
+
+    if (selectedProject) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedProject]);
 
   const itemsPerPage = 4;
   const totalPages = Math.ceil(projects.length / itemsPerPage);
@@ -37,13 +98,22 @@ export const Projects = () => {
           {currentProjects.map((project) => (
             <motion.div
               key={project.id}
+              role="button"
+              tabIndex={0}
+              aria-label={`View details for ${project.title}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="group relative border-t border-white/10 py-12 cursor-pointer"
+              className="group relative border-t border-white/10 py-12 cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#39ff14]/50"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
               onClick={() => setSelectedProject(project)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setSelectedProject(project);
+                }
+              }}
             >
               <div className="flex flex-col md:flex-row justify-between items-baseline relative z-10 mix-blend-difference">
                 <h3 className="text-3xl md:text-6xl font-bold text-gray-400 group-hover:text-[#39ff14] transition-colors duration-300">
@@ -71,7 +141,7 @@ export const Projects = () => {
                     className="hidden md:block absolute right-20 -top-20 z-20 pointer-events-none w-[400px] h-[300px] rounded-xl overflow-hidden border-2 border-[#39ff14]/50 shadow-2xl shadow-[#39ff14]/20"
                     style={{ top: "50%", transform: "translateY(-50%)" }}
                   >
-                    <img
+                    <ProjectImage
                       src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover"
@@ -83,7 +153,7 @@ export const Projects = () => {
 
               {/* Mobile Image (Always visible but small) */}
               <div className="md:hidden mt-6 rounded-lg overflow-hidden border border-white/10">
-                <img
+                <ProjectImage
                   src={project.image}
                   alt={project.title}
                   className="w-full h-48 object-cover"
@@ -184,13 +254,14 @@ export const Projects = () => {
             >
               <button
                 onClick={() => setSelectedProject(null)}
+                aria-label="Close project details"
                 className="absolute top-4 right-4 z-20 p-2 bg-black/50 cursor-pointer hover:bg-black/80 rounded-full text-white transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
 
               <div className="md:w-1/2 h-64 md:h-auto relative shrink-0">
-                <img
+                <ProjectImage
                   src={selectedProject.image}
                   alt={selectedProject.title}
                   className="w-full h-full object-cover"

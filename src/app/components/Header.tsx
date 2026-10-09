@@ -18,14 +18,16 @@ export const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/30 border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <motion.div
+        <motion.a
+          href="#hero"
+          aria-label="Harsh Kesharwani Portfolio Home"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="text-2xl font-bold tracking-tighter"
+          className="text-2xl font-bold tracking-tighter hover:opacity-90 transition-opacity cursor-pointer"
         >
           <span className="text-white">HARSH</span>
           <span className="text-[#39ff14]">.DEV</span>
-        </motion.div>
+        </motion.a>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
@@ -46,8 +48,10 @@ export const Header = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+          className="md:hidden text-white p-2 hover:bg-white/10 rounded-full transition-colors cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={isOpen}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -77,14 +81,17 @@ export const Header = () => {
                 <SocialIcon
                   Icon={Github}
                   href={profile.socials.github}
+                  label="GitHub"
                 />
                 <SocialIcon
                   Icon={Linkedin}
                   href={profile.socials.linkedin}
+                  label="LinkedIn"
                 />
                 <SocialIcon
                   Icon={Twitter}
                   href={profile.socials.twitter}
+                  label="Twitter / X"
                 />
               </div>
             </div>
@@ -95,11 +102,21 @@ export const Header = () => {
   );
 };
 
-const SocialIcon = ({ Icon, href }: { Icon: any; href: string }) => (
+const SocialIcon = ({
+  Icon,
+  href,
+  label,
+}: {
+  Icon: React.ComponentType<{ size?: number }>;
+  href: string;
+  label: string;
+}) => (
   <a
     href={href}
     target="_blank"
     rel="noopener noreferrer"
+    aria-label={label}
+    title={label}
     className="text-gray-400 hover:text-[#39ff14] transition-colors"
   >
     <Icon size={24} />

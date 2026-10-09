@@ -75,9 +75,18 @@ export const About = () => {
 
               {/* Main Photo Housing - Interactive click toggles avatar */}
               <div
+                role="button"
+                tabIndex={0}
+                aria-label="Toggle avatar between real photo and 3D cyber avatar"
                 onClick={() => setAvatarMode((prev) => (prev === "real" ? "cyber" : "real"))}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setAvatarMode((prev) => (prev === "real" ? "cyber" : "real"));
+                  }
+                }}
                 title="Click to switch avatar mode"
-                className="relative w-full h-full rounded-full border-2 border-[#39ff14]/60 bg-gradient-to-b from-[#0a1a08] via-[#050505] to-[#000] backdrop-blur-md flex items-center justify-center overflow-hidden shadow-[0_0_35px_rgba(57,255,20,0.2)] cursor-pointer select-none transition-transform duration-300 group-hover:scale-[1.02]"
+                className="relative w-full h-full rounded-full border-2 border-[#39ff14]/60 bg-gradient-to-b from-[#0a1a08] via-[#050505] to-[#000] backdrop-blur-md flex items-center justify-center overflow-hidden shadow-[0_0_35px_rgba(57,255,20,0.2)] cursor-pointer select-none transition-transform duration-300 group-hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#39ff14]"
               >
                 {/* Radial spotlight behind the head */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(57,255,20,0.25)_0%,_transparent_70%)] pointer-events-none z-0" />
@@ -190,7 +199,7 @@ const Card = ({
   subtitle,
   detail,
 }: {
-  icon: any;
+  icon: React.ComponentType<{ size?: number }>;
   title: string;
   subtitle: string;
   detail: string;
