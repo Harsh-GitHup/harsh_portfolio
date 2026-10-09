@@ -95,27 +95,70 @@ export const Projects = () => {
         </div>
 
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-4 mt-12">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="p-2 rounded-full border border-white/20 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/10 transition-colors"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <span className="text-gray-400 font-medium">
-              Page <span className="text-[#39ff14]">{currentPage}</span> of{" "}
-              {totalPages}
-            </span>
-            <button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-              disabled={currentPage === totalPages}
-              className="p-2 rounded-full border border-white/20 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/10 transition-colors"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mt-16 pt-8 border-t border-white/10">
+            {/* Live counter & pulse indicator */}
+            <div className="text-xs uppercase tracking-widest text-gray-500 font-mono flex items-center gap-2.5">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#39ff14] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#39ff14]" />
+              </span>
+              <span>
+                Showing{" "}
+                <span className="text-white font-semibold">
+                  {(currentPage - 1) * itemsPerPage + 1}–
+                  {Math.min(currentPage * itemsPerPage, projects.length)}
+                </span>{" "}
+                of <span className="text-white font-semibold">{projects.length}</span>{" "}
+                Projects
+              </span>
+            </div>
+
+            {/* Futuristic Glass Pill Pagination Controls */}
+            <div className="inline-flex items-center gap-1.5 p-1.5 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-md shadow-2xl shadow-black/80">
+              {/* Prev Button */}
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-gray-400 hover:text-white disabled:opacity-25 disabled:hover:text-gray-400 disabled:cursor-not-allowed hover:bg-white/10 transition-all cursor-pointer"
+                aria-label="Previous Page"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span className="hidden sm:inline">Prev</span>
+              </button>
+
+              {/* Numbered Pills */}
+              <div className="flex items-center gap-1 px-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                  const isActive = currentPage === page;
+                  return (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`relative w-8 h-8 rounded-full text-xs font-mono font-bold transition-all flex items-center justify-center cursor-pointer ${
+                        isActive
+                          ? "bg-[#39ff14] text-black shadow-[0_0_15px_rgba(57,255,20,0.5)] scale-105"
+                          : "text-gray-400 hover:text-white hover:bg-white/10"
+                      }`}
+                    >
+                      {String(page).padStart(2, "0")}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Next Button */}
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+                disabled={currentPage === totalPages}
+                className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-gray-400 hover:text-white disabled:opacity-25 disabled:hover:text-gray-400 disabled:cursor-not-allowed hover:bg-white/10 transition-all cursor-pointer"
+                aria-label="Next Page"
+              >
+                <span className="hidden sm:inline">Next</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         )}
       </div>

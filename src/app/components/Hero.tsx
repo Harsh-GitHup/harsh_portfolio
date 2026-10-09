@@ -1,8 +1,53 @@
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, Eye } from "lucide-react";
 import { profile } from "../data/profile";
 
 export const Hero = () => {
+  const [animatedViews, setAnimatedViews] = useState<number>(0);
+
+  useEffect(() => {
+    const STORAGE_KEY = "harsh_portfolio_profile_views";
+    const SESSION_KEY = "harsh_portfolio_session_viewed";
+    const BASE_VIEWS = 1420;
+
+    let count = BASE_VIEWS;
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      const parsed = parseInt(stored, 10);
+      if (!isNaN(parsed) && parsed >= BASE_VIEWS) {
+        count = parsed;
+      }
+    }
+
+    // Increment count once per session
+    if (!sessionStorage.getItem(SESSION_KEY)) {
+      count += 1;
+      sessionStorage.setItem(SESSION_KEY, "true");
+      localStorage.setItem(STORAGE_KEY, count.toString());
+    }
+
+    // Smooth count-up animation
+    const duration = 1200;
+    const steps = 30;
+    const stepDuration = duration / steps;
+    let step = 0;
+
+    const timer = setInterval(() => {
+      step++;
+      const progress = step / steps;
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      setAnimatedViews(Math.floor(easeOut * count));
+
+      if (step >= steps) {
+        clearInterval(timer);
+        setAnimatedViews(count);
+      }
+    }, stepDuration);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section
       id="hero"
@@ -23,14 +68,28 @@ export const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#39ff14]/30 bg-[#39ff14]/5 text-[#39ff14] mb-8 backdrop-blur-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#39ff14] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#39ff14]"></span>
-            </span>
-            <span className="text-sm font-medium tracking-wide uppercase">
-              Available for work
-            </span>
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
+            {/* Availability Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#39ff14]/30 bg-[#39ff14]/5 text-[#39ff14] backdrop-blur-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#39ff14] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#39ff14]" />
+              </span>
+              <span className="text-xs sm:text-sm font-medium tracking-wide uppercase">
+                Available for work
+              </span>
+            </div>
+
+            {/* Profile Views / Visitor Counter Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-gray-300 backdrop-blur-sm hover:border-[#39ff14]/40 hover:shadow-[0_0_20px_rgba(57,255,20,0.15)] transition-all group">
+              <Eye className="w-3.5 h-3.5 text-[#39ff14] group-hover:scale-110 transition-transform" />
+              <span className="text-xs sm:text-sm font-mono tracking-wide">
+                <span className="text-white font-bold">
+                  {animatedViews > 0 ? animatedViews.toLocaleString() : "..."}
+                </span>
+                <span className="text-gray-400 ml-1.5 font-sans">Profile Views</span>
+              </span>
+            </div>
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-6">

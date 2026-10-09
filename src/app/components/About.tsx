@@ -56,24 +56,49 @@ export const About = () => {
             viewport={{ once: true }}
             className="w-full md:w-1/3 flex justify-center"
           >
-            <div className="relative w-64 h-64 md:w-80 md:h-80">
-              <div className="absolute inset-0 bg-[#39ff14]/20 rounded-full blur-xl animate-pulse" />
-              <div className="relative w-full h-full rounded-full border-2 border-[#39ff14]/50 bg-black/50 backdrop-blur-sm flex items-center justify-center overflow-hidden">
-                {/* Note: If you have a real photo, replace the Icon above with an img tag: */}
-                {/* <User size={120} className="text-gray-400" /> */}
+            <div className="relative w-72 h-72 md:w-84 md:h-84">
+              {/* Pulsing ambient neon aura */}
+              <div className="absolute inset-0 bg-[#39ff14]/20 rounded-full blur-2xl animate-pulse" />
+
+              {/* Outer rotating dashed cyber-ring */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                className="absolute -inset-5 border border-[#39ff14]/25 rounded-full border-dashed"
+              />
+
+              {/* Secondary glowing tech boundary ring */}
+              <div className="absolute -inset-2 border border-white/10 rounded-full" />
+
+              {/* Main Photo Housing */}
+              <div className="relative w-full h-full rounded-full border-2 border-[#39ff14]/60 bg-gradient-to-b from-[#0a1a08] via-[#050505] to-[#000] backdrop-blur-md flex items-center justify-center overflow-hidden shadow-[0_0_35px_rgba(57,255,20,0.2)]">
+                {/* Radial spotlight behind the head */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(57,255,20,0.25)_0%,_transparent_70%)] pointer-events-none" />
+
+                {/* Profile Image - scaled & aligned to fill nicely */}
                 <img
                   src={about.image}
                   alt={profile.name}
-                  className="w-full h-full object-contain rounded-full"
+                  className="w-full h-full object-cover object-top scale-110 translate-y-3 contrast-[1.06] brightness-[0.98] drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)]"
                 />
+
+                {/* Bottom Torso Fade - eliminates harsh cut */}
+                <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black via-black/75 to-transparent pointer-events-none" />
+
+                {/* Soft Cyber Ambient Rim Overlay */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#39ff14]/15 via-transparent to-[#39ff14]/10 mix-blend-screen pointer-events-none" />
               </div>
 
-              {/* Orbiting elements for decoration */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-[-20px] border border-[#39ff14]/20 rounded-full border-dashed"
-              />
+              {/* Floating Cyberpunk HUD Tag */}
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#0a0a0a]/90 border border-[#39ff14]/40 shadow-xl shadow-black/90 backdrop-blur-md flex items-center gap-2 whitespace-nowrap z-10">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#39ff14] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#39ff14]" />
+                </span>
+                <span className="text-[11px] font-mono tracking-widest text-gray-200 uppercase font-semibold">
+                  Dev // Harsh
+                </span>
+              </div>
             </div>
           </motion.div>
         </div>
