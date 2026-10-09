@@ -1,6 +1,11 @@
 import { motion } from "motion/react";
-import * as LucideIcons from "lucide-react";
+import { GraduationCap, Award, HelpCircle } from "lucide-react";
 import { about, profile } from "../data/profile";
+
+const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
+  GraduationCap,
+  Award,
+};
 
 export const About = () => {
   return (
@@ -29,11 +34,11 @@ export const About = () => {
 
               <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {about.cards.map((card, i) => {
-                  const Icon = LucideIcons[card.iconName as keyof typeof LucideIcons];
+                  const Icon = iconMap[card.iconName] || HelpCircle;
                   return (
                     <Card
                       key={i}
-                      icon={Icon || LucideIcons.HelpCircle}
+                      icon={Icon}
                       title={card.title}
                       subtitle={card.subtitle}
                       detail={card.detail}
