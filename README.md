@@ -8,7 +8,7 @@ A stunning, modern portfolio website featuring a dark theme with neon green acce
 
 ## 🎯 Live Demo
 
-🚀 **[View Live Site](https://harshportfolio-beta.vercel.app/)** _(Deployed to Vercel - live URL)_
+🚀 **[View Live Site](https://harshkesharwani.vercel.app/)** _(Deployed to Vercel - live URL)_
 
 ## ✨ Features
 
@@ -250,7 +250,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ### Harsh Kesharwani
 
-- Portfolio: [Live URL](https://harsh-githup.github.io/My-Portfolio/)
+- Portfolio: [Live URL](https://harshkesharwani.vercel.app/)
 - GitHub: [@Harsh-GitHup](https://github.com/Harsh-GitHup)
 - LinkedIn: [@Harsh Kesharwani](https://www.linkedin.com/in/harshkesharwani)
 - Email: <harshkesharwani037@gmail.com>
