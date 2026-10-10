@@ -184,12 +184,12 @@ export const Projects = () => {
             </div>
 
             {/* Futuristic Glass Pill Pagination Controls */}
-            <div className="inline-flex items-center gap-1.5 p-1.5 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-md shadow-2xl shadow-black/80">
+            <div className="inline-flex items-center gap-1.5 p-1.5 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-md shadow-2xl shadow-black/80 max-w-full overflow-x-auto">
               {/* Prev Button */}
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-gray-400 hover:text-white disabled:opacity-25 disabled:hover:text-gray-400 disabled:cursor-not-allowed hover:bg-white/10 transition-all cursor-pointer"
+                className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-gray-400 hover:text-white disabled:opacity-25 disabled:hover:text-gray-400 disabled:cursor-not-allowed hover:bg-white/10 transition-all cursor-pointer shrink-0"
                 aria-label="Previous Page"
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -197,14 +197,14 @@ export const Projects = () => {
               </button>
 
               {/* Numbered Pills */}
-              <div className="flex items-center gap-1 px-1">
+              <div className="flex items-center gap-1 px-1 shrink-0">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
                   const isActive = currentPage === page;
                   return (
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`relative w-8 h-8 rounded-full text-xs font-mono font-bold transition-all flex items-center justify-center cursor-pointer ${
+                      className={`relative w-8 h-8 rounded-full text-xs font-mono font-bold transition-all flex items-center justify-center cursor-pointer shrink-0 ${
                         isActive
                           ? "bg-[#39ff14] text-black shadow-[0_0_15px_rgba(57,255,20,0.5)] scale-105"
                           : "text-gray-400 hover:text-white hover:bg-white/10"
@@ -222,7 +222,7 @@ export const Projects = () => {
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }
                 disabled={currentPage === totalPages}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-gray-400 hover:text-white disabled:opacity-25 disabled:hover:text-gray-400 disabled:cursor-not-allowed hover:bg-white/10 transition-all cursor-pointer"
+                className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-gray-400 hover:text-white disabled:opacity-25 disabled:hover:text-gray-400 disabled:cursor-not-allowed hover:bg-white/10 transition-all cursor-pointer shrink-0"
                 aria-label="Next Page"
               >
                 <span className="hidden sm:inline">Next</span>
