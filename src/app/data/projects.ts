@@ -6,6 +6,7 @@ export type Project = {
   image: string;
   techStack: string[];
   category: string;
+  types: string;
   liveDemoUrl: string | null;
   githubRepoUrl: string | null;
   highlights: string[];

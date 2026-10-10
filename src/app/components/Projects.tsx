@@ -81,6 +81,43 @@ export const Projects = () => {
 
   const itemsPerPage = 4;
   const totalPages = Math.ceil(projects.length / itemsPerPage);
+  const maxVisiblePages = 3;
+
+  const getPaginationItems = () => {
+    if (totalPages <= maxVisiblePages) {
+      return {
+        pages: Array.from({ length: totalPages }, (_, i) => i + 1),
+        showLeftEllipsis: false,
+        showRightEllipsis: false,
+        startPage: 1,
+      };
+    }
+
+    let start = currentPage - 1;
+    if (start < 1) {
+      start = 1;
+    } else if (start + maxVisiblePages - 1 > totalPages) {
+      start = totalPages - maxVisiblePages + 1;
+    }
+
+    const pages = Array.from({ length: maxVisiblePages }, (_, i) => start + i);
+    const showLeftEllipsis = start > 1;
+    const showRightEllipsis = start + maxVisiblePages - 1 < totalPages;
+
+    return {
+      pages,
+      showLeftEllipsis,
+      showRightEllipsis,
+      startPage: start,
+    };
+  };
+
+  const {
+    pages: visiblePages,
+    showLeftEllipsis,
+    showRightEllipsis,
+    startPage,
+  } = getPaginationItems();
 
   const currentProjects = projects.slice(
     (currentPage - 1) * itemsPerPage,
@@ -196,9 +233,20 @@ export const Projects = () => {
                 <span className="hidden sm:inline">Prev</span>
               </button>
 
-              {/* Numbered Pills */}
+              {/* Numbered Pills (Max 3 Visible) */}
               <div className="flex items-center gap-1 px-1 shrink-0">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                {showLeftEllipsis && (
+                  <button
+                    onClick={() => setCurrentPage(Math.max(1, startPage - 1))}
+                    className="w-7 h-8 flex items-center justify-center text-gray-500 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer text-xs font-mono font-bold tracking-widest shrink-0"
+                    aria-label="Previous pages"
+                    title="Previous pages"
+                  >
+                    ...
+                  </button>
+                )}
+
+                {visiblePages.map((page) => {
                   const isActive = currentPage === page;
                   return (
                     <button
@@ -209,11 +257,28 @@ export const Projects = () => {
                           ? "bg-[#39ff14] text-black shadow-[0_0_15px_rgba(57,255,20,0.5)] scale-105"
                           : "text-gray-400 hover:text-white hover:bg-white/10"
                       }`}
+                      aria-label={`Go to page ${page}`}
+                      aria-current={isActive ? "page" : undefined}
                     >
                       {String(page).padStart(2, "0")}
                     </button>
                   );
                 })}
+
+                {showRightEllipsis && (
+                  <button
+                    onClick={() =>
+                      setCurrentPage(
+                        Math.min(totalPages, startPage + maxVisiblePages),
+                      )
+                    }
+                    className="w-7 h-8 flex items-center justify-center text-gray-500 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer text-xs font-mono font-bold tracking-widest shrink-0"
+                    aria-label="Next pages"
+                    title="Next pages"
+                  >
+                    ...
+                  </button>
+                )}
               </div>
 
               {/* Next Button */}
