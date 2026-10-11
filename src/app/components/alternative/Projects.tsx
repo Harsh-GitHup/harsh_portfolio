@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowUpRight,
@@ -67,22 +67,6 @@ export const Projects = () => {
   const [selectedType, setSelectedType] = useState("All");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    const handleSlash = (e: KeyboardEvent) => {
-      if (
-        e.key === "/" &&
-        !selectedProject &&
-        document.activeElement?.tagName !== "INPUT" &&
-        document.activeElement?.tagName !== "TEXTAREA"
-      ) {
-        e.preventDefault();
-        searchInputRef.current?.focus();
-      }
-    };
-    window.addEventListener("keydown", handleSlash);
-    return () => window.removeEventListener("keydown", handleSlash);
-  }, [selectedProject]);
-
   const categories = useMemo(() => {
     const types = Array.from(
       new Set(projects.map((p) => p.types).filter(Boolean)),
@@ -126,6 +110,92 @@ export const Projects = () => {
   const itemsPerPage = 4;
   const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
   const maxVisiblePages = 3;
+
+  const currentProjectIndex = useMemo(() => {
+    if (!selectedProject) return -1;
+    return filteredProjects.findIndex((p) => p.id === selectedProject.id);
+  }, [selectedProject, filteredProjects]);
+
+  const handlePrevProject = useCallback(() => {
+    if (filteredProjects.length === 0) return;
+    const currentIndex = filteredProjects.findIndex(
+      (p) => p.id === selectedProject?.id,
+    );
+    const newIndex =
+      currentIndex <= 0 ? filteredProjects.length - 1 : currentIndex - 1;
+    const prevProj = filteredProjects[newIndex];
+    setSelectedProject(prevProj);
+    const targetPage = Math.floor(newIndex / itemsPerPage) + 1;
+    if (targetPage !== currentPage) {
+      setCurrentPage(targetPage);
+    }
+  }, [filteredProjects, selectedProject, currentPage, itemsPerPage]);
+
+  const handleNextProject = useCallback(() => {
+    if (filteredProjects.length === 0) return;
+    const currentIndex = filteredProjects.findIndex(
+      (p) => p.id === selectedProject?.id,
+    );
+    const newIndex =
+      currentIndex >= filteredProjects.length - 1 ? 0 : currentIndex + 1;
+    const nextProj = filteredProjects[newIndex];
+    setSelectedProject(nextProj);
+    const targetPage = Math.floor(newIndex / itemsPerPage) + 1;
+    if (targetPage !== currentPage) {
+      setCurrentPage(targetPage);
+    }
+  }, [filteredProjects, selectedProject, currentPage, itemsPerPage]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const isInputActive =
+        document.activeElement?.tagName === "INPUT" ||
+        document.activeElement?.tagName === "TEXTAREA";
+
+      if (e.key === "Escape") {
+        if (isImageExpanded) {
+          setIsImageExpanded(false);
+        } else if (selectedProject) {
+          setSelectedProject(null);
+        }
+        return;
+      }
+
+      if (e.key === "/" && !selectedProject && !isInputActive) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+        return;
+      }
+
+      if (isInputActive) return;
+
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        if (selectedProject) {
+          handlePrevProject();
+        } else if (currentPage > 1) {
+          setCurrentPage((prev) => Math.max(prev - 1, 1));
+        }
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        if (selectedProject) {
+          handleNextProject();
+        } else if (currentPage < totalPages) {
+          setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [
+    selectedProject,
+    isImageExpanded,
+    handlePrevProject,
+    handleNextProject,
+    currentPage,
+    totalPages,
+  ]);
 
   const getPaginationItems = () => {
     if (totalPages <= maxVisiblePages) {
@@ -529,6 +599,34 @@ export const Projects = () => {
               className="absolute inset-0 bg-black/80 backdrop-blur-sm"
               onClick={() => setSelectedProject(null)}
             />
+
+            {/* Floating Left/Right Navigation Arrows for Desktop */}
+            {filteredProjects.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePrevProject();
+                  }}
+                  className="hidden xl:flex fixed left-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-black/80 hover:bg-[#39ff14] text-white hover:text-black border border-white/20 hover:border-[#39ff14] items-center justify-center transition-all shadow-2xl cursor-pointer group"
+                  title="Previous Project (Left Arrow ←)"
+                  aria-label="Previous Project"
+                >
+                  <ChevronLeft className="w-6 h-6 transform group-hover:-translate-x-0.5 transition-transform" />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNextProject();
+                  }}
+                  className="hidden xl:flex fixed right-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-black/80 hover:bg-[#39ff14] text-white hover:text-black border border-white/20 hover:border-[#39ff14] items-center justify-center transition-all shadow-2xl cursor-pointer group"
+                  title="Next Project (Right Arrow →)"
+                  aria-label="Next Project"
+                >
+                  <ChevronRight className="w-6 h-6 transform group-hover:translate-x-0.5 transition-transform" />
+                </button>
+              </>
+            )}
             <motion.div
               layout
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -592,6 +690,37 @@ export const Projects = () => {
                         <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
                       </div>
 
+                      {/* Top Bar Project Switcher */}
+                      {filteredProjects.length > 1 && (
+                        <div className="flex items-center gap-0.5 bg-black/40 border border-white/10 rounded-md px-1 py-0.5">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handlePrevProject();
+                            }}
+                            className="p-1 rounded text-gray-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                            title="Previous project (← Left Arrow)"
+                            aria-label="Previous project"
+                          >
+                            <ChevronLeft className="w-3.5 h-3.5" />
+                          </button>
+                          <span className="text-[10px] font-mono text-[#39ff14] px-1 font-semibold">
+                            {currentProjectIndex + 1}/{filteredProjects.length}
+                          </span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleNextProject();
+                            }}
+                            className="p-1 rounded text-gray-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                            title="Next project (→ Right Arrow)"
+                            aria-label="Next project"
+                          >
+                            <ChevronRight className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      )}
+
                       <span className="text-[11px] font-mono text-gray-300 truncate">
                         {selectedProject.title}
                       </span>
@@ -652,13 +781,24 @@ export const Projects = () => {
                         : "Click to see image bigger"
                     }
                   >
-                    <ProjectImage
-                      src={selectedProject.image}
-                      alt={selectedProject.title}
-                      className={`w-full h-full ${
-                        isImageExpanded ? "max-h-[80vh]" : "max-h-[480px]"
-                      } object-contain rounded drop-shadow-lg transition-all duration-300 group-hover/preview:scale-[1.01]`}
-                    />
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={selectedProject.id}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="w-full h-full flex items-center justify-center"
+                      >
+                        <ProjectImage
+                          src={selectedProject.image}
+                          alt={selectedProject.title}
+                          className={`w-full h-full ${
+                            isImageExpanded ? "max-h-[80vh]" : "max-h-[480px]"
+                          } object-contain rounded drop-shadow-lg transition-all duration-300 group-hover/preview:scale-[1.01]`}
+                        />
+                      </motion.div>
+                    </AnimatePresence>
 
                     {/* Hover Hint Badge (when not expanded) */}
                     {!isImageExpanded && (
@@ -682,11 +822,11 @@ export const Projects = () => {
               <AnimatePresence initial={false}>
                 {!isImageExpanded && (
                   <motion.div
-                    key="project-details-panel"
-                    initial={{ opacity: 0, x: 20 }}
+                    key={`project-details-${selectedProject.id}`}
+                    initial={{ opacity: 0, x: 15 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 30 }}
-                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                    exit={{ opacity: 0, x: -15 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
                     className="w-full md:w-1/2 p-6 md:p-8 flex flex-col overflow-y-auto"
                   >
                     <div className="text-[#39ff14] text-sm font-semibold mb-2">
@@ -735,31 +875,64 @@ export const Projects = () => {
                         </div>
                       )}
 
-                    <div className="flex flex-wrap gap-4 mt-auto pt-6 border-t border-white/10">
-                      {selectedProject.liveDemoUrl &&
-                        selectedProject.liveDemoUrl !== "#" && (
-                          <a
-                            href={selectedProject.liveDemoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-6 py-3 bg-[#39ff14] text-black font-semibold rounded-lg hover:bg-[#32e011] transition-colors text-sm"
+                    <div className="flex flex-wrap items-center justify-between gap-4 mt-auto pt-6 border-t border-white/10">
+                      <div className="flex flex-wrap gap-3">
+                        {selectedProject.liveDemoUrl &&
+                          selectedProject.liveDemoUrl !== "#" && (
+                            <a
+                              href={selectedProject.liveDemoUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 px-5 py-2.5 bg-[#39ff14] text-black font-semibold rounded-lg hover:bg-[#32e011] transition-colors text-xs"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5" />
+                              Live Demo
+                            </a>
+                          )}
+                        {selectedProject.githubRepoUrl &&
+                          selectedProject.githubRepoUrl !== "#" && (
+                            <a
+                              href={selectedProject.githubRepoUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 px-5 py-2.5 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-colors border border-white/5 text-xs"
+                            >
+                              <Github className="w-3.5 h-3.5" />
+                              Source Code
+                            </a>
+                          )}
+                      </div>
+
+                      {/* Modal Next/Prev Quick Switcher with Keyboard Key hints */}
+                      {filteredProjects.length > 1 && (
+                        <div className="flex items-center gap-1.5 text-xs text-gray-400 bg-white/[0.04] border border-white/10 px-2.5 py-1.5 rounded-lg select-none">
+                          <button
+                            onClick={handlePrevProject}
+                            className="p-1 rounded hover:bg-white/10 text-gray-300 hover:text-[#39ff14] transition-colors cursor-pointer"
+                            title="Previous project (Left Arrow ←)"
+                            aria-label="Previous project"
                           >
-                            <ExternalLink className="w-4 h-4" />
-                            Live Demo
-                          </a>
-                        )}
-                      {selectedProject.githubRepoUrl &&
-                        selectedProject.githubRepoUrl !== "#" && (
-                          <a
-                            href={selectedProject.githubRepoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-6 py-3 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-colors border border-white/5 text-sm"
+                            <ChevronLeft className="w-4 h-4" />
+                          </button>
+                          <span className="font-mono text-[11px] text-gray-300">
+                            <span className="text-[#39ff14] font-semibold">
+                              {currentProjectIndex + 1}
+                            </span>{" "}
+                            / {filteredProjects.length}
+                          </span>
+                          <button
+                            onClick={handleNextProject}
+                            className="p-1 rounded hover:bg-white/10 text-gray-300 hover:text-[#39ff14] transition-colors cursor-pointer"
+                            title="Next project (Right Arrow →)"
+                            aria-label="Next project"
                           >
-                            <Github className="w-4 h-4" />
-                            Source Code
-                          </a>
-                        )}
+                            <ChevronRight className="w-4 h-4" />
+                          </button>
+                          <span className="hidden sm:inline text-[10px] text-gray-500 font-mono pl-1.5 border-l border-white/10">
+                            Use ← / → keys
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </motion.div>
                 )}
