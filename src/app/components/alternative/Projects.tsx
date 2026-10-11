@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import { projects } from "../../data/projects";
+import { TechBadge } from "../TechBadge";
 
 const ProjectImage = ({
   src,
@@ -330,6 +331,15 @@ export const Projects = () => {
                     <ArrowUpRight className="text-white opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </div>
                 </div>
+
+                {/* TechStack Skill Badges with Icons */}
+                {project.techStack && project.techStack.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-2 mt-4 relative z-10">
+                    {project.techStack.map((tech) => (
+                      <TechBadge key={tech} name={tech} size="sm" />
+                    ))}
+                  </div>
+                )}
 
                 {/* Hover Image Reveal - Desktop Only */}
                 <AnimatePresence>
@@ -701,12 +711,7 @@ export const Projects = () => {
                           </h4>
                           <div className="flex flex-wrap gap-2">
                             {selectedProject.techStack.map((tech, idx) => (
-                              <span
-                                key={idx}
-                                className="text-xs px-3 py-1 bg-white/5 border border-white/10 rounded-full text-gray-300"
-                              >
-                                {tech}
-                              </span>
+                              <TechBadge key={idx} name={tech} size="md" />
                             ))}
                           </div>
                         </div>
