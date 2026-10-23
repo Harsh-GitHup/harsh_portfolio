@@ -898,7 +898,21 @@ export const Projects = () => {
                               className="flex items-center gap-2 px-5 py-2.5 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-colors border border-white/5 text-xs"
                             >
                               <Github className="w-3.5 h-3.5" />
-                              Source Code
+                              {selectedProject.githubBackendUrl
+                                ? "Frontend Repo"
+                                : "Source Code"}
+                            </a>
+                          )}
+                        {selectedProject.githubBackendUrl &&
+                          selectedProject.githubBackendUrl !== "#" && (
+                            <a
+                              href={selectedProject.githubBackendUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 px-5 py-2.5 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-colors border border-white/5 text-xs"
+                            >
+                              <Github className="w-3.5 h-3.5" />
+                              Backend Repo
                             </a>
                           )}
                       </div>
