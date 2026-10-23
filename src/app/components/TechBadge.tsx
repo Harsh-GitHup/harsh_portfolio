@@ -124,6 +124,15 @@ export const TechIcon: React.FC<TechIconProps> = ({
     );
   }
 
+  // Framer Motion / Motion
+  if (normalized.includes("motion") || normalized.includes("framer")) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <path d="M4 2h16v7.3H12zm0 7.3h8l8 7.4H4zm0 7.4h8v7.3z" fill="#0055FF" />
+      </svg>
+    );
+  }
+
   // HTML / HTML5
   if (normalized.includes("html")) {
     return (
