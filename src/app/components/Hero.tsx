@@ -56,7 +56,12 @@ export const Hero = () => {
           ? `https://countapi.mileshilliard.com/api/v1/hit/${COUNTER_KEY}`
           : `https://countapi.mileshilliard.com/api/v1/get/${COUNTER_KEY}`;
 
-        const res = await fetch(endpoint);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2000);
+
+        const res = await fetch(endpoint, { signal: controller.signal });
+        clearTimeout(timeoutId);
+
         if (!res.ok) throw new Error("Counter API network response was not ok");
 
         const data = await res.json();
