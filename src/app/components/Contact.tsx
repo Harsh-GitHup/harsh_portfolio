@@ -15,8 +15,29 @@ export const Contact = () => {
 
     const formData = new FormData(e.currentTarget);
 
-    // Add your access key to the form data
-    formData.append("access_key", "72a2a482-785a-46a5-9e9d-f2e78c95e266");
+    // Safely retrieve access key strictly from environment variable
+    const env = (
+      import.meta as unknown as {
+        env?: { VITE_WEB3FORMS_ACCESS_KEY?: string };
+      }
+    ).env;
+    const accessKey = env?.VITE_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      console.error("VITE_WEB3FORMS_ACCESS_KEY is not defined in .env");
+      setFormState("error");
+      return;
+    }
+    formData.append("access_key", accessKey);
+
+    // Add subject and sender name to show on received email
+    const senderName =
+      (formData.get("name") as string)?.trim() || "Portfolio Visitor";
+    const customSubject = (formData.get("subject") as string)?.trim();
+    const emailSubject = customSubject
+      ? `[Portfolio] ${customSubject} - from ${senderName}`
+      : `New Portfolio Message from ${senderName}`;
+    formData.set("subject", emailSubject);
+    formData.append("from_name", senderName);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -176,6 +197,22 @@ export const Contact = () => {
                     required
                     className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:outline-none focus:border-[#39ff14] focus:ring-1 focus:ring-[#39ff14] transition-all placeholder:text-gray-600"
                     placeholder="+91 0000000000"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label
+                    htmlFor="subject"
+                    className="text-sm font-medium text-gray-300 ml-1"
+                  >
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:outline-none focus:border-[#39ff14] focus:ring-1 focus:ring-[#39ff14] transition-all placeholder:text-gray-600"
+                    placeholder="Project Inquiry / Job Opportunity"
                   />
                 </div>
 

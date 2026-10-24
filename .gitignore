@@ -17,3 +17,16 @@ yarn-error.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# env files (can opt-in for committing if needed)
+.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# made by me
+/src/app/components/alternative
