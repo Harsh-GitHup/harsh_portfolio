@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://harshkesharwani.vercel.app/sitemap.xml

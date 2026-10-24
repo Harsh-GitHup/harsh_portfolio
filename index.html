@@ -55,6 +55,47 @@
     />
     <meta name="twitter:image:alt" content="Harsh Kesharwani Portfolio Preview" />
     <meta name="twitter:creator" content="@HarshKesha91325" />
+
+    <!-- JSON-LD Structured Data Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://harshkesharwani.vercel.app/#person",
+            "name": "Harsh Kesharwani",
+            "jobTitle": "Full Stack Software Developer",
+            "url": "https://harshkesharwani.vercel.app/",
+            "image": "https://harshkesharwani.vercel.app/harsh.jpg",
+            "sameAs": [
+              "https://github.com/Harsh-GitHup",
+              "https://www.linkedin.com/in/harshkesharwani"
+            ],
+            "email": "mailto:harshkesharwani037@gmail.com",
+            "knowsAbout": [
+              "Python",
+              "Django",
+              "React",
+              "TypeScript",
+              "PostgreSQL",
+              "Tailwind CSS",
+              "REST APIs"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://harshkesharwani.vercel.app/#website",
+            "url": "https://harshkesharwani.vercel.app/",
+            "name": "Harsh Kesharwani Portfolio",
+            "description": "Full Stack Software Developer specializing in Python, Django, React, and scalable modern web applications.",
+            "publisher": {
+              "@id": "https://harshkesharwani.vercel.app/#person"
+            }
+          }
+        ]
+      }
+    </script>
   </head>
 
   <body>
